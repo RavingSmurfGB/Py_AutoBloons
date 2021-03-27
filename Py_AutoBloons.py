@@ -9,6 +9,9 @@ from datetime import datetime
 #       Can place monkey (probably made up of other function)
 #   Also we will need to find a way to auto accept levels
 #       perhaps click in those areas occasionly
+#       if fails, check for image in a new thread, if image matches:
+#       kill normal thread (have to make it first), accept the stuff,
+#       then restart game to main menu and start thread again
 
 
 # SETUP
@@ -16,28 +19,6 @@ from datetime import datetime
 #   user input resolution, store in file 
 #   convert from 2560x1440 to users resolution for button_positions
 
-# RESOLUTION/POSITIONS
-#   look into pyautogui.moveRel(xOffset, yOffset, duration=num_seconds)
-#       using the above will mean aspect ratio will not matter, only resolution
-
-#   Potentially use pyautogui.screenshot() at start, then find corners of screen,
-#       use that to find middle, go to middle and center, then use relatives
-#       or use pyautogui.locateCenterOnScreen(image, grayscale=False)
-
-''' # convertion idea, make function to do:
-orignal resolution variable, x = 100
-orignal resolution = 200
-
-x(100 ) divided by orignal resolution(200) = 0.5
-
-0.5 times by new resolution(400) = 200
-
-new resolution = 400
-new resolution variable x = 200
-'''
-#however doing it bellow method would only work if monitor was in 16:9 ratio, would need more conversion for others
-#   we could use a static padding variable to add to x and y to fit the screen
-#   could even dynamically figure that out
 
 
 # OTHER
@@ -52,13 +33,6 @@ new resolution variable x = 200
 
 
 ###########################################[SETUP]###########################################
-''' deprocated
-resolution = pyautogui.size() # This returns your primary monitor resolution
-if resolution == "width=2560, height=1440":
-    print("correct resolution continueing ")
-else:
-    print("Be sure your main monitor is set to 2560 x 1440" )
-'''
 
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
@@ -109,7 +83,7 @@ reso_16 = [
     }
 ]
 
-button_positions = {
+button_positions = { # Creates a dictionary of all positions needed for monkeys (positions mapped to 2160 x 1440 resolution)
     "HOME_MENU_START" : [1123, 1248],
     "EXPERT_SELECTION" : [1778, 1304],
     "RIGHT_ARROW_SELECTION" : [2193, 582],
@@ -129,14 +103,26 @@ upgrade_path = {
 }
 
 def padding():
+# Get's width and height of current resolution
+# we iterate through reso_16 for heights, if current resolution height matches one of the entires 
+# then it will calulate the difference of the width's between current resolution and 16:9 (reso_16) resolution
+# divides by 2 for each side of padding
+
+# Variables Used
+#   width -- used to referance current resolution width
+#   height -- used to referance current resolution height
+#   pad -- used to output how much padding we expect in different resolutions
+#   reso_16 -- list that  
     width, height = pyautogui.size()
     pad = 0
-    for x in reso_16:
+    for x in reso_16: 
         if height == x['height']:
             pad = (width - x['width'])/2
     return pad
 
 def scaling(pos_list):
+# This function will dynamically calculate the differance between current resolution and designed for 2560x1440
+# it will also add any padding needed to positions to account for 21:9 
     width, height = pyautogui.size()
     if width == 1440:
         return pos_list
@@ -144,65 +130,56 @@ def scaling(pos_list):
     y = pos_list[1]/1440
     x = x * width
     y = y * height
-    x + padding()
+    x + padding() # Add's the pad to to the curent x position variable
     return [x, y]
+
 
 def dynamic_button(button_positions):
     for key in button_positions.keys():
         button_positions[key] = scaling(button_positions[key])
     return button_positions
 
-button_positions = dynamic_button(button_positions)
+
+# Calls dynamic_button and creates a new database taking into account actual resolution
+# Then assigns new dictionary returned by dynamic_button() to button_positions
+button_positions = dynamic_button(button_positions) 
+
 
 def jprint(message):
     dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
     print(dt_string + " " + message)
 
-def sleep(): # Used for spacing in between commands
-    time.sleep(0.5)
-
 def move_mouse(location):
     pyautogui.moveTo(location)
-    sleep()
-
-
+    time.sleep(0.5)
 
 def click(location): #pass in x and y, and it will click for you
     pyautogui.click(button_positions[location]) # performs the pyautogui click function while passing in the variable from button_positions that matches button
-    sleep()
-
-def re_allign():
-    print()
+    time.sleep(0.5)
 
 def press_key(key):
     pyautogui.press(key)
-    sleep()
+    time.sleep(0.5)
     #pyautogui.keyDown(key)
     #pyautogui.keyUp(key)
 
 def place_tower(tower, location): 
     jprint("placing down " + tower)
-    
     move_mouse(button_positions[location])
     press_key(monkeys[tower])
     pyautogui.click()
-    sleep()
-    #re_allign()
-
+    time.sleep(0.5)
 
 def upgrade_tower(path, location):
 
     click(location) #Calls click() and passes in the location
     
     press_key(upgrade_path[path]) #Calls press_key() and passes in button
-    sleep()
+    time.sleep(0.5)
     press_key("esc")
     
 
-def level_check():
-    print()
-
-###########################################[
+###########################################
 
 ###########################################[GAME START]###########################################
 def Start_Select_Map():
