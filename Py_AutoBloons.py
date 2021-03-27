@@ -12,21 +12,30 @@ import pyautogui, time
 #   user input resolution, store in file 
 #   convert from 2560x1440 to users resolution for button_positions
 
-#   Write 
+''' # convertion idea, make function to do:
+orignal resolution variable, x = 100
+orignal resolution = 200
+
+x(100 ) divided by orignal resolution(200) = 0.5
+
+0.5 times by new resolution(400) = 200
+
+new resolution = 400
+new resolution variable x = 200
+'''
 
 
 ###########################################
 
 
 ###########################################[SETUP]###########################################
-
+''' deprocated
 resolution = pyautogui.size() # This returns your virtual resolution for your entire desktop
 if resolution == "width=2560, height=1440":
     print("correct resolution continueing ")
 else:
     print("Be sure your main monitor is set to 2560 x 1440" )
-
-
+'''
 
 
 
@@ -109,6 +118,7 @@ def Start_Select_Map():
 
 Start_Select_Map()   
 ###########################################[
+
 
 
 ###########################################[MAIN GAME]###########################################
