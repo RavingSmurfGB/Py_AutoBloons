@@ -1,4 +1,5 @@
 import pyautogui, time
+from datetime import datetime
 
 ###########################################[TO DO]###########################################
 # BASICS
@@ -6,11 +7,22 @@ import pyautogui, time
 #   Have functions that:
 #       Can click and accept button_positions
 #       Can place monkey (probably made up of other function)
+#   Also we will need to find a way to auto accept levels
+#       perhaps click in those areas occasionly
+
 
 # SETUP
 #   have a setup file that installs requirements
 #   user input resolution, store in file 
 #   convert from 2560x1440 to users resolution for button_positions
+
+# RESOLUTION/POSITIONS
+#   look into pyautogui.moveRel(xOffset, yOffset, duration=num_seconds)
+#       using the above will mean aspect ratio will not matter, only resolution
+
+#   Potentially use pyautogui.screenshot() at start, then find corners of screen,
+#       use that to find middle, go to middle and center, then use relatives
+#       or use pyautogui.locateCenterOnScreen(image, grayscale=False)
 
 ''' # convertion idea, make function to do:
 orignal resolution variable, x = 100
@@ -23,7 +35,16 @@ x(100 ) divided by orignal resolution(200) = 0.5
 new resolution = 400
 new resolution variable x = 200
 '''
+#however doing it bellow method would only work if monitor was in 16:9 ratio, would need more conversion for others
+#   we could use a static padding variable to add to x and y to fit the screen
+#   could even dynamically figure that out
 
+
+# OTHER
+#   Use hotkey to quit (esc), could use bool, when key press switch state
+#       put main function calls in a if statement with that bool, or edit while
+#   Different colour text output :)
+#   write good readme
 
 ###########################################
 
@@ -37,7 +58,7 @@ else:
     print("Be sure your main monitor is set to 2560 x 1440" )
 '''
 
-
+pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
 monkeys = {
     "DART" : "Q",
@@ -72,40 +93,77 @@ button_positions = {
     "DARK_CASTLE" : [720, 350],
     "EASY_MODE" : [838, 550],
     "STANDARD_GAME_MODE" : [847,780],
-    "OVERWRITE_SAVE" : [1520, 974]
-
+    "OVERWRITE_SAVE" : [1520, 974],
+    "HERO_LOCATION" : [950, 575],
+    "SUBMARINE_LOCATION" : [1454, 575]
 }
-
-#print(button_positions["HOME_MENU_START"]) # Gets home menu starting postion from dictionary
 
 
 upgrade_path = {
-    "PATH_1" : ",",
-    "PATH_2" : ".",
-    "PATH_3" : "-"
+    1 : ",",
+    2 : ".",
+    3 : "/"
 
 }
- 
+
+
+def jprint(message):
+    dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
+    print(dt_string + " " + message)
 
 def sleep(): # Used for spacing in between commands
-    time.sleep(1)
+    time.sleep(0.5)
 
-
-def click(button): #pass in x and y, and it will click for you
-    #button_positions[button]
-    pyautogui.click(button_positions[button])
+def move_mouse(location):
+    pyautogui.moveTo(location)
     sleep()
 
+
+
+def click(location): #pass in x and y, and it will click for you
+    pyautogui.click(button_positions[location]) # performs the pyautogui click function while passing in the variable from button_positions that matches button
+    sleep()
+
+def re_allign():
+    print()
+
+def press_key(key):
+    pyautogui.press(key)
+    sleep()
+    #pyautogui.keyDown(key)
+    #pyautogui.keyUp(key)
+
+def place_tower(tower, location): 
+    jprint("placing down " + tower)
+    
+    move_mouse(button_positions[location])
+    press_key(monkeys[tower])
+    pyautogui.click()
+    sleep()
+    #re_allign()
+
+
+def upgrade_tower(path, location):
+
+    click(location) #Calls click() and passes in the location
+    
+    press_key(upgrade_path[path]) #Calls press_key() and passes in button
+    sleep()
+    press_key("esc")
+    
+
+def level_check():
+    print()
 
 ###########################################[
 
 ###########################################[GAME START]###########################################
 def Start_Select_Map():
 
-    print("Starting code, move cursor over bloons in the next 5 seconds")
+    jprint("Starting code, move cursor over bloons in the next 5 seconds")
     time.sleep(5)
 
-    print("Map Selection in progress")
+    jprint("Map Selection in progress")
 
     click("HOME_MENU_START") # Move Mouse and click from Home Menu, Start
     click("EXPERT_SELECTION") # Move Mouse to expert and click
@@ -114,15 +172,36 @@ def Start_Select_Map():
     click("EASY_MODE") # Move Mouse to select easy mode
     click("STANDARD_GAME_MODE") # Move mouse to select Standard mode
     click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
+    
+###########################################
 
 
-Start_Select_Map()   
-###########################################[
 
 
 
 ###########################################[MAIN GAME]###########################################
+def Main_Game():
+    jprint("Starting main game")
+    time.sleep(2)
+    place_tower("HERO", "HERO_LOCATION")
+
+    press_key("space") # Start the game
+    press_key("space") # Fast forward the game
+    time.sleep(8)
+    place_tower("SUBMARINE", "SUBMARINE_LOCATION")
+    time.sleep(25)
+    upgrade_tower(3, "SUBMARINE_LOCATION")
+    
+
+
+###########################################
 
 
 
+
+
+###########################################[MAIN LOOP]###########################################
+# while True:
+Start_Select_Map()   
+Main_Game()
 ###########################################
