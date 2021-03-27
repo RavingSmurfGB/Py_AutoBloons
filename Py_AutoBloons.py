@@ -120,19 +120,20 @@ def padding():
             pad = (width - x['width'])/2
     return pad
 
-def scaling(pos_list):
+def scaling(pos_list, do_padding = True):
 # This function will dynamically calculate the differance between current resolution and designed for 2560x1440
 # it will also add any padding needed to positions to account for 21:9 
     width, height = pyautogui.size()
-    if width == 1440:
-        return pos_list
     x = pos_list[0]/2560 
     y = pos_list[1]/1440
     x = x * width
     y = y * height
-    x + padding() # Add's the pad to to the curent x position variable
+    if do_padding == True:
+        x + padding() # Add's the pad to to the curent x position variable
     return [x, y]
 
+position = scaling(button_positions["SUBMARINE_LOCATION"])
+print(position)
 
 def dynamic_button(button_positions):
     for key in button_positions.keys():
@@ -142,7 +143,7 @@ def dynamic_button(button_positions):
 
 # Calls dynamic_button and creates a new database taking into account actual resolution
 # Then assigns new dictionary returned by dynamic_button() to button_positions
-button_positions = dynamic_button(button_positions) 
+#button_positions = dynamic_button(button_positions) 
 
 
 def jprint(message):
@@ -154,7 +155,11 @@ def move_mouse(location):
     time.sleep(0.5)
 
 def click(location): #pass in x and y, and it will click for you
-    pyautogui.click(button_positions[location]) # performs the pyautogui click function while passing in the variable from button_positions that matches button
+    pyautogui.click(scaling(button_positions[location])) # performs the pyautogui click function while passing in the variable from button_positions that matches button
+    time.sleep(0.5)
+
+def start_click(location): #pass in x and y, and it will click for you
+    pyautogui.click(scaling(button_positions[location], False)) # performs the pyautogui click function while passing in the variable from button_positions that matches button
     time.sleep(0.5)
 
 def press_key(key):
@@ -165,7 +170,7 @@ def press_key(key):
 
 def place_tower(tower, location): 
     jprint("placing down " + tower)
-    move_mouse(button_positions[location])
+    move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
     pyautogui.click()
     time.sleep(0.5)
@@ -189,13 +194,13 @@ def Start_Select_Map():
 
     jprint("Map Selection in progress")
 
-    click("HOME_MENU_START") # Move Mouse and click from Home Menu, Start
-    click("EXPERT_SELECTION") # Move Mouse to expert and click
-    click("RIGHT_ARROW_SELECTION") # Move Mouse to arrow and click
-    click("DARK_CASTLE") # Move Mouse to Dark Castle
-    click("EASY_MODE") # Move Mouse to select easy mode
-    click("STANDARD_GAME_MODE") # Move mouse to select Standard mode
-    click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
+    start_click("HOME_MENU_START") # Move Mouse and click from Home Menu, Start
+    start_click("EXPERT_SELECTION") # Move Mouse to expert and click
+    start_click("RIGHT_ARROW_SELECTION") # Move Mouse to arrow and click
+    start_click("DARK_CASTLE") # Move Mouse to Dark Castle
+    start_click("EASY_MODE") # Move Mouse to select easy mode
+    start_click("STANDARD_GAME_MODE") # Move mouse to select Standard mode
+    start_click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
     
 ###########################################
 
