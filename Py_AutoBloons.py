@@ -45,13 +45,15 @@ new resolution variable x = 200
 #       put main function calls in a if statement with that bool, or edit while
 #   Different colour text output :)
 #   write good readme
+#   implement passive xp gain
+#       pass in tower to placem, it places it 
 
 ###########################################
 
 
 ###########################################[SETUP]###########################################
 ''' deprocated
-resolution = pyautogui.size() # This returns your virtual resolution for your entire desktop
+resolution = pyautogui.size() # This returns your primary monitor resolution
 if resolution == "width=2560, height=1440":
     print("correct resolution continueing ")
 else:
@@ -86,6 +88,27 @@ monkeys = {
     "HERO" : "U"
 }
 
+
+
+reso_16 = [
+    {
+        "width": 1280,
+        "height": 720        
+    },
+    {
+        "width": 1920,
+        "height": 1080
+    },
+    {
+        "width": 2560,
+        "height": 1440
+    },
+    {
+        "width": 3840,
+        "height": 2160
+    }
+]
+
 button_positions = {
     "HOME_MENU_START" : [1123, 1248],
     "EXPERT_SELECTION" : [1778, 1304],
@@ -98,7 +121,6 @@ button_positions = {
     "SUBMARINE_LOCATION" : [1454, 575]
 }
 
-
 upgrade_path = {
     1 : ",",
     2 : ".",
@@ -106,6 +128,31 @@ upgrade_path = {
 
 }
 
+def padding():
+    width, height = pyautogui.size()
+    pad = 0
+    for x in reso_16:
+        if height == x['height']:
+            pad = (width - x['width'])/2
+    return pad
+
+def scaling(pos_list):
+    width, height = pyautogui.size()
+    if width == 1440:
+        return pos_list
+    x = pos_list[0]/2560 
+    y = pos_list[1]/1440
+    x = x * width
+    y = y * height
+    x + padding()
+    return [x, y]
+
+def dynamic_button(button_positions):
+    for key in button_positions.keys():
+        button_positions[key] = scaling(button_positions[key])
+    return button_positions
+
+button_positions = dynamic_button(button_positions)
 
 def jprint(message):
     dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
