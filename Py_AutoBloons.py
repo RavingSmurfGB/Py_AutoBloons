@@ -1,4 +1,4 @@
-import pyautogui, time
+import pyautogui, time, termcolor
 from datetime import datetime
 
 ###########################################[TO DO]###########################################
@@ -37,8 +37,11 @@ from datetime import datetime
 
 #ISSUES
 #   believe that math doesnt work for converting to other aspect ratios
-#       confirmed via screenshots UI scaling is the same ...
-#       buttons and shit same size m8
+#       this is because we are trying to convert the resolution to 3440x1440 then add padding
+#       what we need to do is not touch the resolution if the 1440 matches, then simply add padding
+#       if resolution is not 16:9 leave x (horizontal) axis alone
+#       
+
 
 
 #   21:9 ASPECT ration convertion doesnt work
@@ -65,7 +68,8 @@ expert_selection 2227 1308
 
 
 ###########################################[SETUP]###########################################
-
+width, height = pyautogui.size()
+path = "Support_Files\\" + str(height) + "_levelup.png"
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
 monkeys = {
@@ -130,12 +134,12 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "VICTORY_CONTINUE" : [1283, 1215],
     "VICTORY_HOME" : [1057, 1135],
     "EASTER_COLLECTION" : [1279, 911],
-    "EASTER_L_INSTA" : [1074, 725],
-    "EASTER_R_INSTA" : [1479, 724],
+    "LEFT_INSTA" : [1074, 725],
+    "RIGHT_INSTA" : [1479, 724],
+    "MID_INSTA" : [1279, 724],
     "EASTER_CONTINUE" : [1280, 1330],
-    "EASTER_EXIT" : [100, 93]
-
-
+    "EASTER_EXIT" : [100, 93],
+    "QUIT_HOME" : [1126, 1135]
 
 }
 
@@ -170,20 +174,28 @@ def scaling(pos_list):
 # it will also add any padding needed to positions to account for 21:9 
 
 # do_padding -- this is used during start 
+    reso_21 = False
     width, height = pyautogui.size()
-    x = pos_list[0]/2560 
+    for x in reso_16: 
+        if height == x['height']:
+            if width != x['width']:
+                reso_21 = True
+                break
+    if reso_21 != True:
+        x = pos_list[0]/2560 
+        x = x * width
     y = pos_list[1]/1440
-    x = x * width
     y = y * height
     #print(" Me wihout padding " + str([x]))
-    x + padding() # Add's the pad to to the curent x position variable
+    x = x + padding() # Add's the pad to to the curent x position variable
     #print(" Me with padding -- " + str([x]))
     return [x, y]
 
-
 def jprint(message):
+
+    #print(termcolor.colored("hi", "green")) 
     dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
-    print(dt_string + " " + message)
+    print(dt_string + " " + termcolor.colored(message, "green"))
 
 def move_mouse(location):
     pyautogui.moveTo(location)
@@ -200,7 +212,34 @@ def press_key(key):
     time.sleep(0.5)
 
 
+def Level_Up_Check():
+
+    found = pyautogui.locateOnScreen(path)
+    if found != None:
+        jprint("Detected Level UP !!!!!!!!!!!!!!!!!")
+
+        click("LEFT_INSTA") # Accept lvl
+        time.sleep(1)
+        click("LEFT_INSTA") # Accept knoledge
+        time.sleep(1)
+
+        click("LEFT_INSTA") # unlock insta
+        time.sleep(1)
+        click("LEFT_INSTA") # collect insta
+        time.sleep(1)
+
+        click("MID_INSTA") # unlock insta
+        time.sleep(1)
+        click("MID_INSTA") # collect insta
+        time.sleep(1)
+
+        click("RIGHT_INSTA") # unlock r insta
+        time.sleep(1)
+        click("RIGHT_INSTA") # collect r insta
+        time.sleep(51)  
+
 def place_tower(tower, location): 
+    Level_Up_Check()
     jprint("placing down " + tower)
     move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
@@ -208,6 +247,7 @@ def place_tower(tower, location):
     time.sleep(0.5)
 
 def upgrade_tower(path, location):
+    Level_Up_Check()
     jprint("Upgrading " + location)
 
     click(location) #Calls click() and passes in the location
@@ -216,6 +256,12 @@ def upgrade_tower(path, location):
     time.sleep(0.5)
     press_key("esc")
     
+def tmp_scaling(pos_list): # used for easter event, to exit the main menu but without padding (due to 21:9 monitors)
+    x = pos_list[0]/2560 
+    x = x * width
+    y = pos_list[1]/1440
+    y = y * height
+    return [x, y]
 
 ###########################################
 
@@ -287,24 +333,24 @@ def Exit_Game():
     time.sleep(2)
     click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
     time.sleep(1)
-    click("EASTER_L_INSTA") # unlock insta
+    click("LEFT_INSTA") # unlock insta
     time.sleep(1)
-    click("EASTER_L_INSTA") # collect insta
+    click("LEFT_INSTA") # collect insta
     time.sleep(1)
-    click("EASTER_R_INSTA") # unlock r insta
+    click("RIGHT_INSTA") # unlock r insta
     time.sleep(1)
-    click("EASTER_R_INSTA") # collect r insta
+    click("RIGHT_INSTA") # collect r insta
     time.sleep(1)
     click("EASTER_CONTINUE")
     time.sleep(1)
+    
     # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
-    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
     time.sleep(0.3)
-    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
     time.sleep(0.3)
-    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
     time.sleep(0.5)
-
 
 
 
@@ -319,12 +365,10 @@ def Exit_Game():
 
 
 ###########################################[MAIN LOOP]###########################################
-#
 
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
-
 
 ###########################################
