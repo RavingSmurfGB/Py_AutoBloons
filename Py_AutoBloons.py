@@ -297,11 +297,11 @@ def Exit_Game():
     time.sleep(1)
     click("EASTER_CONTINUE")
     time.sleep(1)
-    # alternativly we can try to press esc 3 times
+    # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
     pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
-    time.sleep(0.1)
+    time.sleep(0.3)
     pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
-    time.sleep(0.1)
+    time.sleep(0.3)
     pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
     time.sleep(0.5)
 
@@ -320,16 +320,11 @@ def Exit_Game():
 
 ###########################################[MAIN LOOP]###########################################
 #
-'''
+
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
-'''
-pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
-time.sleep(0.3)
-pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
-time.sleep(0.3)
-pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
-time.sleep(0.5)
+
+
 ###########################################
