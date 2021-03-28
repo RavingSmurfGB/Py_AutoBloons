@@ -193,7 +193,7 @@ def scaling(pos_list):
 
 def jprint(message):
 
-    #print(termcolor.colored("hi", "green")) 
+    # print(termcolor.colored("hi", "green")) 
     dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
     print(dt_string + " " + termcolor.colored(message, "green"))
 
@@ -366,9 +366,21 @@ def Exit_Game():
 
 ###########################################[MAIN LOOP]###########################################
 
+time.sleep(2)
+jprint("pressing buttons now!")
+pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]), clicks=2, interval=0.25)
+
+time.sleep(1)
+pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
+time.sleep(0.3)
+#pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
+time.sleep(0.5)
+
+time.sleep(99)
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
+
 
 ###########################################
