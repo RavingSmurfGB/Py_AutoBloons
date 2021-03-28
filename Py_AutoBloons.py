@@ -128,7 +128,12 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "NINJA_LOCATION" : [738, 844],
     "WIZARD_LOCATION" : [736, 645],
     "VICTORY_CONTINUE" : [1283, 1215],
-    "VICTORY_HOME" : [1057, 1135]
+    "VICTORY_HOME" : [1057, 1135],
+    "EASTER_COLLECTION" : [1279, 911],
+    "EASTER_L_INSTA" : [1074, 725],
+    "EASTER_R_INSTA" : [1479, 724],
+    "EASTER_CONTINUE" : [1280, 1330],
+    "EASTER_EXIT" : [100, 93]
 
 
 
@@ -272,14 +277,36 @@ def Main_Game():
     upgrade_tower(3, "SUBMARINE_LOCATION")
     time.sleep(30)
     upgrade_tower(3, "SUBMARINE_LOCATION")
-    time.sleep(27)
+    time.sleep(25)
 
 def Exit_Game():
     jprint("Exiting Game, restating loop")
     click("VICTORY_CONTINUE")
     time.sleep(2)
     click("VICTORY_HOME")
-    time.sleep(3)
+    time.sleep(2)
+    click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
+    time.sleep(1)
+    click("EASTER_L_INSTA") # unlock insta
+    time.sleep(1)
+    click("EASTER_L_INSTA") # collect insta
+    time.sleep(1)
+    click("EASTER_R_INSTA") # unlock r insta
+    time.sleep(1)
+    click("EASTER_R_INSTA") # collect r insta
+    time.sleep(1)
+    click("EASTER_CONTINUE")
+    time.sleep(1)
+    # alternativly we can try to press esc 3 times
+    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    time.sleep(0.1)
+    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    time.sleep(0.1)
+    pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+    time.sleep(0.5)
+
+
+
 
 
     
@@ -293,8 +320,16 @@ def Exit_Game():
 
 ###########################################[MAIN LOOP]###########################################
 #
+'''
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
+'''
+pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+time.sleep(0.3)
+pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+time.sleep(0.3)
+pyautogui.click(scaling(button_positions["EASTER_EXIT"]))
+time.sleep(0.5)
 ###########################################
