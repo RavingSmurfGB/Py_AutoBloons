@@ -439,6 +439,7 @@ def Exit_Game():
 while True:
     Start_Select_Map()   
     Main_Game()
+    Exit_Game()
 
 
 ###########################################
