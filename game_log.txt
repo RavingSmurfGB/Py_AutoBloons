@@ -1,0 +1,12 @@
+
+22:18:56 -- STARTUP 
+22:18:56 -- Starting code, move cursor over bloons in the next 5 seconds
+22:19:01 -- STATUS -- Map Selection in progress
+22:19:01 -- Support_Files\1440_defeat.png
+22:19:02 -- Support_Files\1440_victory.png
+22:19:02 -- Support_Files\1440_menu.png
+22:19:07 --  STATUS -- Starting main game
+22:19:07 -- Support_Files\1440_defeat.png
+22:19:08 -- Support_Files\1440_victory.png
+22:19:08 -- Support_Files\1440_menu.png
+22:19:11 -- placing down HERO
