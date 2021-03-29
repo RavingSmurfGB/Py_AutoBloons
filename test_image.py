@@ -2,15 +2,14 @@ import pyautogui, termcolor
 
 
 width, height = pyautogui.size()
+path = "Support_Files\\" + str(height) + "_levelup.png"
 
 ## this in thread:
-path = "Support_Files\\" + str(height) + "_levelup.png"
-found = pyautogui.locateOnScreen(path)
-if found != None:
-    # here run code to handle level ups, will have to also implement insta collect
-    print(found)
+def Level_Up_Check():
 
+    found = pyautogui.locateOnScreen(path)
+    if found != None:
+        print("Found image")
+    elif found == None:
+        print("Could not find image")
 
-
-
-print(termcolor.colored("hi", "green")) 

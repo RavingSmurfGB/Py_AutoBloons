@@ -68,8 +68,20 @@ expert_selection 2227 1308
 
 
 ###########################################[SETUP]###########################################
+
+logging = True
+
+if logging == True:
+    dt_string = datetime.now().strftime("%H:%M:%S")
+    with open("game_log.txt", "a+") as file: #open's the file to allow it to be written to
+        file.write("\n" + dt_string + " -- STARTUP \n")# writes to log new startup, includes date/time
+
 width, height = pyautogui.size()
 path = "Support_Files\\" + str(height) + "_levelup.png"
+victory_path = "Support_Files\\" + str(height) + "_victory.png"
+defeat_path = "Support_Files\\" + str(height) + "_defeat.png"
+menu_path = "Support_Files\\" + str(height) + "_menu.png"
+easter_path = "Support_Files\\" + str(height) + "_easter.png"
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
 monkeys = {
@@ -196,6 +208,10 @@ def jprint(message):
     # print(termcolor.colored("hi", "green")) 
     dt_string = datetime.now().strftime("%H:%M:%S") #set's the date and time to now
     print(dt_string + " " + termcolor.colored(message, "green"))
+    if logging == True:
+        dt_string = datetime.now().strftime("%H:%M:%S")
+        with open("game_log.txt", "a+") as file: #open's the file to allow it to be written to
+            file.write(dt_string + " -- " + message + "\n")# writes to log new startup, includes date/time
 
 def move_mouse(location):
     pyautogui.moveTo(location)
@@ -216,7 +232,7 @@ def Level_Up_Check():
 
     found = pyautogui.locateOnScreen(path)
     if found != None:
-        jprint("Detected Level UP !!!!!!!!!!!!!!!!!")
+        jprint("DETECTED -- Level UP")
 
         click("LEFT_INSTA") # Accept lvl
         time.sleep(1)
@@ -238,15 +254,59 @@ def Level_Up_Check():
         click("RIGHT_INSTA") # collect r insta
         time.sleep(51)  
 
-def place_tower(tower, location): 
+def easter_event_check():
+    found = pyautogui.locateOnScreen(easter_path)
+    if found != None:
+        jprint("DETECTED -- Easter")
+        click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
+        time.sleep(1)
+        click("LEFT_INSTA") # unlock insta
+        time.sleep(1)
+        click("LEFT_INSTA") # collect insta
+        time.sleep(1)
+        click("RIGHT_INSTA") # unlock r insta
+        time.sleep(1)
+        click("RIGHT_INSTA") # collect r insta
+        time.sleep(1)
+        click("EASTER_CONTINUE")
+        time.sleep(1)
+
+        # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
+        pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
+        time.sleep(1)
+        
+
+
+
+def victory_check():
+    found = pyautogui.locateOnScreen(victory_path)
+    if found != None:
+        jprint("DETECTED -- Victory")
+
+def defeat_check():     
+    found = pyautogui.locateOnScreen(defeat_path)
+    if found != None:
+        jprint("DETECTED -- Defeat")
+
+def menu_check():
+    found = pyautogui.locateOnScreen(menu_path)
+    if found != None:
+        jprint("DETECTED -- Menu")
+    
+    
+
+def place_tower(tower, location):  # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
     Level_Up_Check()
     jprint("placing down " + tower)
     move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
     pyautogui.click()
     time.sleep(0.5)
+       
+    press_key("space") # Start the game
+    press_key("space") # Fast forward the game
 
-def upgrade_tower(path, location):
+def upgrade_tower(path, location): # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
     Level_Up_Check()
     jprint("Upgrading " + location)
 
@@ -271,7 +331,13 @@ def Start_Select_Map():
     jprint("Starting code, move cursor over bloons in the next 5 seconds")
     time.sleep(5)
 
-    jprint("Map Selection in progress")
+
+
+    jprint("STATUS -- Map Selection in progress")
+
+    defeat_check()
+    victory_check()
+    menu_check()
 
     click("HOME_MENU_START") # Move Mouse and click from Home Menu, Start
     click("EXPERT_SELECTION") # Move Mouse to expert and click
@@ -283,7 +349,14 @@ def Start_Select_Map():
     
 
 def Main_Game():
-    jprint("Starting main game")
+    jprint(" STATUS -- Starting main game")
+
+
+    defeat_check()
+    victory_check()
+    menu_check()
+
+    
     time.sleep(2)
     place_tower("HERO", "HERO_LOCATION")
 
@@ -326,31 +399,23 @@ def Main_Game():
     time.sleep(25)
 
 def Exit_Game():
-    jprint("Exiting Game, restating loop")
+
+
+
+    jprint(" STATUS -- Exiting Game, restating loop")
+
+    defeat_check()
+    victory_check()
+    menu_check()
+
+    
     click("VICTORY_CONTINUE")
     time.sleep(2)
     click("VICTORY_HOME")
     time.sleep(2)
-    click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
-    time.sleep(1)
-    click("LEFT_INSTA") # unlock insta
-    time.sleep(1)
-    click("LEFT_INSTA") # collect insta
-    time.sleep(1)
-    click("RIGHT_INSTA") # unlock r insta
-    time.sleep(1)
-    click("RIGHT_INSTA") # collect r insta
-    time.sleep(1)
-    click("EASTER_CONTINUE")
-    time.sleep(1)
-    
-    # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
-    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-    time.sleep(0.3)
-    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-    time.sleep(0.3)
-    pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-    time.sleep(0.5)
+
+    easter_event_check()
+    time.sleep(2)
 
 
 
@@ -366,17 +431,6 @@ def Exit_Game():
 
 ###########################################[MAIN LOOP]###########################################
 
-time.sleep(2)
-jprint("pressing buttons now!")
-pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]), clicks=2, interval=0.25)
-
-time.sleep(1)
-pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-time.sleep(0.3)
-#pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-time.sleep(0.5)
-
-time.sleep(99)
 while True:
     Start_Select_Map()   
     Main_Game()
