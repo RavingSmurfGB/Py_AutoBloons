@@ -280,15 +280,18 @@ def easter_event_check():
 
 def victory_check():
     found = pyautogui.locateOnScreen(victory_path)
+    jprint(victory_path)
     if found != None:
         jprint("DETECTED -- Victory")
 
 def defeat_check():     
+    jprint(defeat_path)
     found = pyautogui.locateOnScreen(defeat_path)
     if found != None:
         jprint("DETECTED -- Defeat")
 
 def menu_check():
+    jprint(menu_path)
     found = pyautogui.locateOnScreen(menu_path)
     if found != None:
         jprint("DETECTED -- Menu")
