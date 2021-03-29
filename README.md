@@ -2,13 +2,15 @@
 A Python script that will auto run Bloons TD 6 on Dark Castle
 
 
-confirmed to work on all 16:9 resolutions (resolution in game should be set to maximum possible)
+Resolutions officaly support:
+1920x1080
+2560x1440
+3840x2160
+*Resolutions based on the above, but are 21:9 may also work
+** Resolution refers to your main monitor size, not game resolution
 
-21:9 resolutions are also supported if height is 
- 720p
- 1080p
- 1440p
- 2160p
+
+
 
 
 Tips:
