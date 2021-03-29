@@ -179,6 +179,7 @@ def padding():
         if height == x['height']:
             pad = (width - x['width'])/2
     #print("I have been padding -- " + str(pad))
+
     return pad
 
 def scaling(pos_list):
@@ -192,6 +193,7 @@ def scaling(pos_list):
         if height == x['height']:
             if width != x['width']:
                 reso_21 = True
+                x = pos_list[0]
                 break
     if reso_21 != True:
         x = pos_list[0]/2560 
@@ -253,6 +255,8 @@ def Level_Up_Check():
         time.sleep(1)
         click("RIGHT_INSTA") # collect r insta
         time.sleep(51)  
+        press_key("space") # Start the game
+        press_key("space") # Fast forward the game
 
 def easter_event_check():
     found = pyautogui.locateOnScreen(easter_path)
@@ -305,9 +309,7 @@ def place_tower(tower, location):  # passsssssssssssssssssss time.sleep in to th
     press_key(monkeys[tower])
     pyautogui.click()
     time.sleep(0.5)
-       
-    press_key("space") # Start the game
-    press_key("space") # Fast forward the game
+
 
 def upgrade_tower(path, location): # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
     Level_Up_Check()
@@ -415,7 +417,7 @@ def Exit_Game():
     click("VICTORY_CONTINUE")
     time.sleep(2)
     click("VICTORY_HOME")
-    time.sleep(2)
+    time.sleep(4)
 
     easter_event_check()
     time.sleep(2)
@@ -433,11 +435,12 @@ def Exit_Game():
 
 
 ###########################################[MAIN LOOP]###########################################
-
+easter_event_check()
+'''
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
-
+'''
 
 ###########################################

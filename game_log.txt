@@ -10,3 +10,7 @@
 22:19:08 -- Support_Files\1440_victory.png
 22:19:08 -- Support_Files\1440_menu.png
 22:19:11 -- placing down HERO
+
+22:27:24 -- STARTUP 
+
+22:27:34 -- STARTUP 
