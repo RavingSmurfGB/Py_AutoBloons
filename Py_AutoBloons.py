@@ -36,34 +36,13 @@ from datetime import datetime
 
 
 #ISSUES
-#   believe that math doesnt work for converting to other aspect ratios
-#       this is because we are trying to convert the resolution to 3440x1440 then add padding
-#       what we need to do is not touch the resolution if the 1440 matches, then simply add padding
-#       if resolution is not 16:9 leave x (horizontal) axis alone
-#       
 
+# on larger resolutions the image detection will take longer than usual
+#   This means the timing will be out of sync for those with higher resollutions than (2160x1440)
 
+#   To resolve we can take the time before we do level_up_check() 
+#   Then after level_up_check() we take away the time from time.sleep()
 
-#   21:9 ASPECT ration convertion doesnt work
-#   pixels are off horizontaly
-#   perhaps just get user to add in manually to button_positions
-#       however depending on how we handle levels this could be a problem
-
-
-''' code positions
-HOME_MENU_START
- Me wihout padding [1509.03125, 1248.0]
-I have been padding -- 440.0
- Me with padding -- [1509.03125, 1248.0]
-EXPERT_SELECTION
- Me wihout padding [2389.1875, 1304.0]
-I have been padding -- 440.0
- Me with padding -- [2389.1875, 1304.0]
- '''
-''' # actual posiution on sean scren
-home_menu start 1552, 1248
-expert_selection 2227 1308
-'''
 ###########################################
 
 
@@ -232,7 +211,7 @@ def press_key(key):
 
 def Level_Up_Check():
 
-    found = pyautogui.locateOnScreen(path)
+    found = pyautogui.locateOnScreen(path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Level UP")
 
@@ -259,7 +238,7 @@ def Level_Up_Check():
         press_key("space") # Fast forward the game
 
 def easter_event_check():
-    found = pyautogui.locateOnScreen(easter_path)
+    found = pyautogui.locateOnScreen(easter_path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Easter")
         click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
@@ -283,20 +262,20 @@ def easter_event_check():
 
 
 def victory_check():
-    found = pyautogui.locateOnScreen(victory_path)
+    found = pyautogui.locateOnScreen(victory_path, confidence=0.9)
     jprint(victory_path)
     if found != None:
         jprint("DETECTED -- Victory")
 
 def defeat_check():     
     jprint(defeat_path)
-    found = pyautogui.locateOnScreen(defeat_path)
+    found = pyautogui.locateOnScreen(defeat_path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Defeat")
 
 def menu_check():
     jprint(menu_path)
-    found = pyautogui.locateOnScreen(menu_path)
+    found = pyautogui.locateOnScreen(menu_path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Menu")
     
@@ -435,11 +414,11 @@ def Exit_Game():
 
 
 ###########################################[MAIN LOOP]###########################################
-
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
+
 
 
 ###########################################

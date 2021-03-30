@@ -1,3 +1,4 @@
 pyautogui
 pillow
 termcolor
+opencv-python
