@@ -208,10 +208,18 @@ def press_key(key):
     pyautogui.press(key)
     time.sleep(0.5)
 
+def jtime(seconds):
+    #print(seconds)
+    time.sleep(seconds)
 
-def Level_Up_Check():
+def Level_Up_Check(seconds):
+    
+
+    #get first time here
+    seconds_before = time.time()
 
     found = pyautogui.locateOnScreen(path, confidence=0.9)
+
     if found != None:
         jprint("DETECTED -- Level UP")
 
@@ -233,9 +241,23 @@ def Level_Up_Check():
         click("RIGHT_INSTA") # unlock r insta
         time.sleep(1)
         click("RIGHT_INSTA") # collect r insta
-        time.sleep(51)  
+        time.sleep(1)  
         press_key("space") # Start the game
+        time.sleep(0.5)
         press_key("space") # Fast forward the game
+
+    #get second time here
+    seconds_after = time.time()
+    time_dif = seconds_after - seconds_before # we calculate the difference of time that was used in this function
+
+
+    
+    seconds = seconds - time_dif # we take away the time differance from seconds # how long the script should now wait
+
+    if seconds < 0: # if seconds happened to be a negative (we took more time than seconds was orignaly was to get here)
+        seconds = 0
+
+    return seconds
 
 def easter_event_check():
     found = pyautogui.locateOnScreen(easter_path, confidence=0.9)
@@ -263,35 +285,40 @@ def easter_event_check():
 
 def victory_check():
     found = pyautogui.locateOnScreen(victory_path, confidence=0.9)
-    jprint(victory_path)
+    #jprint(victory_path)
     if found != None:
         jprint("DETECTED -- Victory")
 
 def defeat_check():     
-    jprint(defeat_path)
+    #jprint(defeat_path)
     found = pyautogui.locateOnScreen(defeat_path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Defeat")
 
 def menu_check():
-    jprint(menu_path)
+    #jprint(menu_path)
     found = pyautogui.locateOnScreen(menu_path, confidence=0.9)
     if found != None:
         jprint("DETECTED -- Menu")
     
     
 
-def place_tower(tower, location):  # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
-    Level_Up_Check()
+def place_tower(tower, location, seconds):  # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
+    seconds_calc = Level_Up_Check(seconds)
+
     jprint("placing down " + tower)
+
     move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
     pyautogui.click()
     time.sleep(0.5)
+    jtime(seconds_calc)
+    
 
 
-def upgrade_tower(path, location): # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
-    Level_Up_Check()
+def upgrade_tower(path, location, seconds): # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
+    seconds_calc = Level_Up_Check(seconds)
+
     jprint("Upgrading " + location)
 
     click(location) #Calls click() and passes in the location
@@ -299,6 +326,7 @@ def upgrade_tower(path, location): # passsssssssssssssssssss time.sleep in to th
     press_key(upgrade_path[path]) #Calls press_key() and passes in button
     time.sleep(0.5)
     press_key("esc")
+    jtime(seconds_calc)
     
 def tmp_scaling(pos_list): # used for easter event, to exit the main menu but without padding (due to 21:9 monitors)
     x = pos_list[0]/2560 
@@ -342,45 +370,48 @@ def Main_Game():
 
     
     time.sleep(2)
-    place_tower("HERO", "HERO_LOCATION")
+    place_tower("HERO", "HERO_LOCATION", 0.5)
 
     press_key("space") # Start the game
     press_key("space") # Fast forward the game
+
     time.sleep(8)
-    place_tower("SUBMARINE", "SUBMARINE_LOCATION")
-    time.sleep(8.5)
-    upgrade_tower(1, "SUBMARINE_LOCATION")
-    time.sleep(18)
-    upgrade_tower(3, "SUBMARINE_LOCATION")
-    time.sleep(46)
-    upgrade_tower(3, "SUBMARINE_LOCATION")
-    time.sleep(24)
-    upgrade_tower(1, "SUBMARINE_LOCATION")
-    time.sleep(15)
-    place_tower("NINJA", "NINJA_LOCATION")
-    time.sleep(11.5)
-    upgrade_tower(1, "NINJA_LOCATION")
-    time.sleep(11.5),
-    upgrade_tower(1, "NINJA_LOCATION")
-    time.sleep(4)
-    upgrade_tower(3, "NINJA_LOCATION")
-    time.sleep(12)
-    upgrade_tower(1, "NINJA_LOCATION")
-    time.sleep(8)
-    place_tower("WIZARD", "WIZARD_LOCATION")
-    time.sleep(5)
-    upgrade_tower(2, "WIZARD_LOCATION")
-    time.sleep(9)
-    upgrade_tower(2, "WIZARD_LOCATION")
-    time.sleep(51)
-    upgrade_tower(2, "WIZARD_LOCATION")
-    time.sleep(43)
-    upgrade_tower(1, "NINJA_LOCATION")
-    time.sleep(5)
-    upgrade_tower(3, "SUBMARINE_LOCATION")
-    time.sleep(30)
-    upgrade_tower(3, "SUBMARINE_LOCATION")
-    time.sleep(25)
+    place_tower("SUBMARINE", "SUBMARINE_LOCATION", 8.5)
+    #time.sleep(8.5)
+    upgrade_tower(1, "SUBMARINE_LOCATION", 18)
+    #time.sleep(18)
+    upgrade_tower(3, "SUBMARINE_LOCATION", 46)
+    #time.sleep(46)
+    upgrade_tower(3, "SUBMARINE_LOCATION", 24)
+    #time.sleep(24)
+    upgrade_tower(1, "SUBMARINE_LOCATION", 15)
+    #time.sleep(15)
+    place_tower("NINJA", "NINJA_LOCATION", 11.5)
+    #time.sleep(11.5)
+    upgrade_tower(1, "NINJA_LOCATION", 11.5)
+    #time.sleep(11.5),
+    upgrade_tower(1, "NINJA_LOCATION", 4)
+    #time.sleep(4)
+    upgrade_tower(3, "NINJA_LOCATION", 12)
+    #time.sleep(12)
+    upgrade_tower(1, "NINJA_LOCATION", 8)
+    #time.sleep(8)
+    place_tower("WIZARD", "WIZARD_LOCATION", 5)
+    #time.sleep(5)
+    upgrade_tower(2, "WIZARD_LOCATION", 9)
+    #time.sleep(9)
+    upgrade_tower(2, "WIZARD_LOCATION", 51)
+    #time.sleep(51)
+    upgrade_tower(2, "WIZARD_LOCATION", 43)
+    #time.sleep(43)
+    upgrade_tower(1, "NINJA_LOCATION", 5)
+    #time.sleep(5)
+    upgrade_tower(3, "SUBMARINE_LOCATION", 30)
+    #time.sleep(30)
+    upgrade_tower(3, "SUBMARINE_LOCATION", 25)
+    #time.sleep(25)
+    jtime(Level_Up_Check(1))
+
 
 def Exit_Game():
 
