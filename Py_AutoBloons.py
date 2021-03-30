@@ -213,7 +213,7 @@ def jtime(seconds):
     time.sleep(seconds)
 
 def Level_Up_Check(seconds):
-    
+
 
     #get first time here
     seconds_before = time.time()
@@ -304,10 +304,12 @@ def menu_check():
     
 
 def place_tower(tower, location, seconds):  # passsssssssssssssssssss time.sleep in to this and before it waits run the level check 
+    
     seconds_calc = Level_Up_Check(seconds)
 
     jprint("placing down " + tower)
-
+    if logging == True:
+        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
     move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
     pyautogui.click()
@@ -320,7 +322,8 @@ def upgrade_tower(path, location, seconds): # passsssssssssssssssssss time.sleep
     seconds_calc = Level_Up_Check(seconds)
 
     jprint("Upgrading " + location)
-
+    if logging == True:
+        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
     click(location) #Calls click() and passes in the location
     
     press_key(upgrade_path[path]) #Calls press_key() and passes in button
