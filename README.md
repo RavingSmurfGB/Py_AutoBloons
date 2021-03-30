@@ -10,6 +10,8 @@ Resolutions officaly support:
 ** Resolution refers to your main monitor size, not game resolution
 
 
+XP gathering:
+not supported on boats/ submarines.
 
 
 

@@ -9,8 +9,8 @@ from datetime import datetime
 #       Can place monkey (probably made up of other function)                           Done
 #   Have code start game                                                                Done
 #   Have code beat game                                                                 Done
-#   Have code exit to main menu                                                         
-#   Loop all above in function
+#   Have code exit to main menu                                                         Done   
+#   Loop all above in function                                                          Doone
 #   Also we will need to find a way to auto accept levels
 #       perhaps click in those areas occasionly
 #       if fails, check for image in a new thread, if image matches:
@@ -28,10 +28,21 @@ from datetime import datetime
 # OTHER
 #   Use hotkey to quit (esc), could use bool, when key press switch state
 #       put main function calls in a if statement with that bool, or edit while
-#   Different colour text output :)
+#   Different colour text output :)                                                     Done
 #   write good readme
-#   implement passive xp gain
-#       pass in tower to placem, it places it 
+#   implement passive xp gain                                                           Done
+#       pass in tower to placem, it places it                                   
+
+# Implement new game plan
+#   move new loop to main function
+#   implement xp mode 
+#   hero check for obyn when first launch
+#       if not detected the select em
+#   on each round change call levelcheck()
+#   implement config file to:
+#       enable loging
+#       select xp tower
+#           when xp tower is set, xp_tower_game should = True
 
 
 
@@ -49,6 +60,8 @@ from datetime import datetime
 ###########################################[SETUP]###########################################
 
 logging = True
+xp_tower_game = True
+xp_tower = "GLUE"
 
 if logging == True:
     dt_string = datetime.now().strftime("%H:%M:%S")
@@ -130,9 +143,12 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "MID_INSTA" : [1279, 724],
     "EASTER_CONTINUE" : [1280, 1330],
     "EASTER_EXIT" : [100, 93],
-    "QUIT_HOME" : [1126, 1135]
+    "QUIT_HOME" : [1126, 1135],
+    "XP_TOWER_1" : [868, 172],
+    "XP_TOWER_2" : [1086, 282]
 
 }
+
 
 upgrade_path = {
     1 : ",",
@@ -241,9 +257,9 @@ def Level_Up_Check(seconds):
         click("RIGHT_INSTA") # unlock r insta
         time.sleep(1)
         click("RIGHT_INSTA") # collect r insta
-        time.sleep(1)  
+        time.sleep(2)  
         press_key("space") # Start the game
-        time.sleep(0.5)
+        time.sleep(1)
         press_key("space") # Fast forward the game
 
     #get second time here
@@ -308,12 +324,13 @@ def place_tower(tower, location, seconds):  # passsssssssssssssssssss time.sleep
     seconds_calc = Level_Up_Check(seconds)
 
     jprint("placing down " + tower)
-    if logging == True:
-        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
+
     move_mouse(scaling(button_positions[location]))
     press_key(monkeys[tower])
     pyautogui.click()
     time.sleep(0.5)
+    if logging == True:
+        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
     jtime(seconds_calc)
     
 
@@ -322,13 +339,14 @@ def upgrade_tower(path, location, seconds): # passsssssssssssssssssss time.sleep
     seconds_calc = Level_Up_Check(seconds)
 
     jprint("Upgrading " + location)
-    if logging == True:
-        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
+
     click(location) #Calls click() and passes in the location
     
     press_key(upgrade_path[path]) #Calls press_key() and passes in button
     time.sleep(0.5)
     press_key("esc")
+    if logging == True:
+        jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
     jtime(seconds_calc)
     
 def tmp_scaling(pos_list): # used for easter event, to exit the main menu but without padding (due to 21:9 monitors)
@@ -366,11 +384,9 @@ def Start_Select_Map():
 def Main_Game():
     jprint(" STATUS -- Starting main game")
 
-
     defeat_check()
     victory_check()
     menu_check()
-
     
     time.sleep(2)
     place_tower("HERO", "HERO_LOCATION", 0.5)
@@ -378,46 +394,52 @@ def Main_Game():
     press_key("space") # Start the game
     press_key("space") # Fast forward the game
 
-    time.sleep(8)
+    time.sleep(20)
     place_tower("SUBMARINE", "SUBMARINE_LOCATION", 8.5)
-    #time.sleep(8.5)
+
     upgrade_tower(1, "SUBMARINE_LOCATION", 18)
-    #time.sleep(18)
+
     upgrade_tower(3, "SUBMARINE_LOCATION", 46)
-    #time.sleep(46)
+
     upgrade_tower(3, "SUBMARINE_LOCATION", 24)
-    #time.sleep(24)
+
     upgrade_tower(1, "SUBMARINE_LOCATION", 15)
-    #time.sleep(15)
+
     place_tower("NINJA", "NINJA_LOCATION", 11.5)
-    #time.sleep(11.5)
+
     upgrade_tower(1, "NINJA_LOCATION", 11.5)
-    #time.sleep(11.5),
+
     upgrade_tower(1, "NINJA_LOCATION", 4)
-    #time.sleep(4)
+
     upgrade_tower(3, "NINJA_LOCATION", 12)
-    #time.sleep(12)
-    upgrade_tower(1, "NINJA_LOCATION", 8)
-    #time.sleep(8)
-    place_tower("WIZARD", "WIZARD_LOCATION", 5)
-    #time.sleep(5)
-    upgrade_tower(2, "WIZARD_LOCATION", 9)
-    #time.sleep(9)
-    upgrade_tower(2, "WIZARD_LOCATION", 51)
-    #time.sleep(51)
-    upgrade_tower(2, "WIZARD_LOCATION", 43)
-    #time.sleep(43)
-    upgrade_tower(1, "NINJA_LOCATION", 5)
-    #time.sleep(5)
-    upgrade_tower(3, "SUBMARINE_LOCATION", 30)
-    #time.sleep(30)
-    upgrade_tower(3, "SUBMARINE_LOCATION", 25)
-    #time.sleep(25)
+
+    upgrade_tower(1, "NINJA_LOCATION", 23)
+
+    upgrade_tower(3, "SUBMARINE_LOCATION", 39)
+
+    if xp_tower_game == True:
+        place_tower(xp_tower, "XP_TOWER_1", 22.5)
+        #we place first xp towe in here!!!!
+        jtime(Level_Up_Check(22.5))
+        # then sleep for 45 sec
+        place_tower(xp_tower, "XP_TOWER_2", 20.5)
+        #we place second xp tower in now
+        # then sleep for 41 sec
+        jtime(Level_Up_Check(20.5))
+    elif xp_tower_game == False:
+        jtime(Level_Up_Check(14.5))
+        jtime(Level_Up_Check(14.5))
+        jtime(Level_Up_Check(14.5))
+        jtime(Level_Up_Check(13.5))
+
+    upgrade_tower(3, "SUBMARINE_LOCATION", 40)
     jtime(Level_Up_Check(1))
 
 
-def Exit_Game():
 
+
+def Exit_Game():
+    
 
 
     jprint(" STATUS -- Exiting Game, restating loop")
@@ -436,7 +458,7 @@ def Exit_Game():
     time.sleep(2)
 
 
-
+def XP_Main_Game():
 
     
 
@@ -450,7 +472,10 @@ def Exit_Game():
 ###########################################[MAIN LOOP]###########################################
 while True:
     Start_Select_Map()   
-    Main_Game()
+    if xp_tower_game == False:
+        Main_Game()
+    elif xp_tower_game == True:
+        XP_Main_Game()
     Exit_Game()
 
 
