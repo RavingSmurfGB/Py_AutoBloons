@@ -10,17 +10,17 @@ A Python script that will auto run Bloons TD 6 on Dark Castle
 
 ### Installation
 Automatic Install   
-> 1. Extract .zip
-> 2. Run setup.py
+ 1. Extract .zip
+ 2. Run setup.py
 
 Manual Install  
-> 1. Extract .zip
-> 2. Follow the bellow command
-> * pip install pyautogui
-> * pip install pillow
-> * pip install termcolor
-> * pip install opencv-python
-> * pip install pyyaml
+ 1. Extract .zip
+ 2. Follow the bellow command
+    * pip install pyautogui
+    * pip install pillow
+    * pip install termcolor
+    * pip install opencv-python
+    * pip install pyyaml
 ### How To Use
 
 ### Monkey Upgrades Needed
