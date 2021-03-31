@@ -17,12 +17,12 @@ Manual Install
  1. Extract .zip
  2. Open a CMD window
  3. Enter each command bellow
->    * pip install pyautogui
->    * pip install pillow
->    * pip install termcolor
->    * pip install opencv-python
->    * pip install pyyaml
->    
+>>    * pip install pyautogui
+>>    * pip install pillow
+>>    * pip install termcolor
+>>    * pip install opencv-python
+>>    * pip install pyyaml
+   
 ### How To Use
 
 ### Monkey Upgrades Needed
