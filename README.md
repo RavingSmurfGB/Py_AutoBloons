@@ -37,6 +37,7 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
  2. Double click Py_AutoBloons.py
  3. Tab back in to Bloons TD 6 within 5 seconds / ensure your cursor is over it   
  \| The Bloons TD 6 Game must be played on your primary monitor.
+ \| Auto Start 
 
 ## What Is Needed
 To run this script ensure that the following upgrades are obtained and the Expert map Dark Castle is unlocked.
@@ -49,7 +50,7 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 #### Resolutions officialy supported:  
 * 1920x1080  
 * 2560x1440  
-* 3840x2160 \| Not yet fully implemented  
+* 3840x2160 \| Issue with Hero not being selected, select OBYN hero manually as a temporary fix
 #### Other Tips:
 \| Resolutions based on the above, but are 21:9 may also work  
 \| Resolution refers to your main monitor size, not game resolution  
