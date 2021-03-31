@@ -1,4 +1,4 @@
-import pyautogui, time, termcolor
+import pyautogui, time, termcolor, yaml, pathlib
 from datetime import datetime
 
 ###########################################[TO DO]###########################################
@@ -10,58 +10,71 @@ from datetime import datetime
 #   Have code start game                                                                Done
 #   Have code beat game                                                                 Done
 #   Have code exit to main menu                                                         Done   
-#   Loop all above in function                                                          Doone
-#   Also we will need to find a way to auto accept levels
-#       perhaps click in those areas occasionly
-#       if fails, check for image in a new thread, if image matches:
-#       kill normal thread (have to make it first), accept the stuff,
-#       then restart game to main menu and start thread again
+#   Loop all above in function                                                          Done
+#   Also we will need to find a way to auto accept levels                               Done
 
 
 # SETUP
-#   have a setup file that installs requirements
-#   user input resolution, store in file 
-#   convert from 2560x1440 to users resolution for button_positions
+#   have a setup file that installs requirements    
 
 
 
 # OTHER
-#   Use hotkey to quit (esc), could use bool, when key press switch state
-#       put main function calls in a if statement with that bool, or edit while
+#   Use hotkey to quit (ctrl+esc), 
 #   Different colour text output :)                                                     Done
 #   write good readme
 #   implement passive xp gain                                                           Done
-#       pass in tower to placem, it places it                                   
+#       pass in tower to placem, it places it                                           Done
+
+
 
 # Implement new game plan
-#   move new loop to main function
-#   implement xp mode 
-#   hero check for obyn when first launch
-#       if not detected the select em
+#   move new loop to main function                                                      Done
+#   implement xp mode                                                                   Done
+#   hero check for obyn when first launch                                               Done
+#       if not detected the select em                                                   Done
 #   on each round change call levelcheck()
 #   implement config file to:
 #       enable loging
 #       select xp tower
 #           when xp tower is set, xp_tower_game should = True
+#   Under game_plan.txt, time every round, and not how much money there is 
+#   implement verbose instamonkey collection on lvl up
 
-
-
-#ISSUES
-
-# on larger resolutions the image detection will take longer than usual
-#   This means the timing will be out of sync for those with higher resollutions than (2160x1440)
-
-#   To resolve we can take the time before we do level_up_check() 
-#   Then after level_up_check() we take away the time from time.sleep()
 
 ###########################################
 
 
 ###########################################[SETUP]###########################################
+if pathlib.Path("config.txt").is_file():
+    pass
+else:
+    with open("config.txt", "w") as file: # Open the file as read
+        pass
 
-logging = True
-xp_tower_game = True
-xp_tower = "GLUE"
+'''
+with open("config.txt", ) as stream:
+    out = yaml.load(stream)
+    print(out['XP_Monkey']['Logging'])
+'''
+with open("config.txt") as file: # Open the file as read
+    config_file = yaml.load(file, Loader=yaml.FullLoader) # Set the contents to = tmp_current_dictionary
+
+for key, value in config_file.items():
+    if key == "Logging":
+        if value == None:
+            logging = False
+        else:
+            logging = value
+    if key == "XP_Monkey":
+        if value == None:
+            xp_tower_game = False
+            xp_tower = None
+        else:
+            xp_tower_game = True
+            xp_tower = value
+    print(key, value) 
+
 
 if logging == True:
     dt_string = datetime.now().strftime("%H:%M:%S")
@@ -74,6 +87,7 @@ victory_path = "Support_Files\\" + str(height) + "_victory.png"
 defeat_path = "Support_Files\\" + str(height) + "_defeat.png"
 menu_path = "Support_Files\\" + str(height) + "_menu.png"
 easter_path = "Support_Files\\" + str(height) + "_easter.png"
+obyn_hero_path = "Support_Files\\" + str(height) + "_obyn.png"
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
 monkeys = {
@@ -138,14 +152,19 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "VICTORY_CONTINUE" : [1283, 1215],
     "VICTORY_HOME" : [1057, 1135],
     "EASTER_COLLECTION" : [1279, 911],
+    "F_LEFT_INSTA" : [868, 722],
+    "F_RIGHT_INSTA" : [1680, 722],
     "LEFT_INSTA" : [1074, 725],
     "RIGHT_INSTA" : [1479, 724],
-    "MID_INSTA" : [1279, 724],
+    "MID_INSTA" : [1276, 727],
     "EASTER_CONTINUE" : [1280, 1330],
     "EASTER_EXIT" : [100, 93],
     "QUIT_HOME" : [1126, 1135],
     "XP_TOWER_1" : [868, 172],
-    "XP_TOWER_2" : [1086, 282]
+    "XP_TOWER_2" : [1086, 282],
+    "HERO_SELECT" : [799, 1272],
+    "SELECT_OBYN" : [996, 1296],
+    "CONFIRM_HERO" : [855, 893]
 
 }
 
@@ -266,7 +285,7 @@ def Level_Up_Check(seconds):
     seconds_after = time.time()
     time_dif = seconds_after - seconds_before # we calculate the difference of time that was used in this function
 
-
+    
     
     seconds = seconds - time_dif # we take away the time differance from seconds # how long the script should now wait
 
@@ -289,8 +308,18 @@ def easter_event_check():
         time.sleep(1)
         click("RIGHT_INSTA") # collect r insta
         time.sleep(1)
-        click("EASTER_CONTINUE")
+        click("F_LEFT_INSTA")
         time.sleep(1)
+        click("F_LEFT_INSTA")
+        time.sleep(1)
+        click("F_RIGHT_INSTA")
+        time.sleep(1)
+        click("F_RIGHT_INSTA")
+        time.sleep(1)
+
+        time.sleep(1)
+        click("EASTER_CONTINUE")
+
 
         # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
         pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
@@ -356,14 +385,29 @@ def tmp_scaling(pos_list): # used for easter event, to exit the main menu but wi
     y = y * height
     return [x, y]
 
+
+def hero_obyn_check():
+    found = pyautogui.locateOnScreen(obyn_hero_path, confidence=0.9)
+    if found == None:
+        jprint("STATUS -- Hero not detected, changing hero")
+        click("HERO_SELECT")
+        click("SELECT_OBYN")
+        click("CONFIRM_HERO")
+        press_key("esc")
+
+
+jprint("Starting code, move cursor over bloons in the next 5 seconds")
+time.sleep(3)
+hero_obyn_check()
+
+
 ###########################################
 
 ###########################################[GAME]###########################################
 def Start_Select_Map():
 
-    jprint("Starting code, move cursor over bloons in the next 5 seconds")
-    time.sleep(5)
-
+    
+    time.sleep(2)
 
 
     jprint("STATUS -- Map Selection in progress")
@@ -430,7 +474,7 @@ def Main_Game():
         jtime(Level_Up_Check(14.5))
         jtime(Level_Up_Check(14.5))
         jtime(Level_Up_Check(14.5))
-        jtime(Level_Up_Check(13.5))
+        jtime(Level_Up_Check(34.5))
 
     upgrade_tower(3, "SUBMARINE_LOCATION", 40)
     jtime(Level_Up_Check(1))
@@ -458,9 +502,151 @@ def Exit_Game():
     time.sleep(2)
 
 
-def XP_Main_Game():
+def round_based_loop():
+    timings = 0
 
+    #SETUP
+    jprint(" STATUS -- Starting main game")
+
+    defeat_check()
+    victory_check()
+    menu_check()
     
+    time.sleep(2)
+    place_tower("HERO", "HERO_LOCATION", 0.5)
+
+    press_key("space") # Start the game
+    press_key("space") # Fast forward the game
+    time.sleep(1) # pushes back all the 
+
+    #ROUND 1: 9 seconds, 119 cash , hero placed 550
+    jtime(Level_Up_Check(9))
+
+    #ROUND 2: 9.5 seconds, 252 cash, 
+    jtime(Level_Up_Check(9.5))
+
+    #ROUND 3: 10.2 seconds, 111 cash, sub placed 275
+    place_tower("SUBMARINE", "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(10.2))
+    
+    #ROUND 4: 9 seconsd, 221 cash, 
+    jtime(Level_Up_Check(9))
+
+    #ROUND 5: 20 seconds, 450 cash, sub upgraded 110
+    upgrade_tower(1, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(20))
+
+    #ROUND 6: 10 seconds, 233 cash, sub upgraded 380
+    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(10))
+
+    #ROUND 7: 14 seconds, 415 cash, 
+    jtime(Level_Up_Check(14))
+
+    #ROUND 8: 14.2 seconds, 615 cash,
+    jtime(Level_Up_Check(14.2))
+
+    #ROUND 9: 10.3 seconds,  814 cash 
+    jtime(Level_Up_Check(10.3))
+
+    #ROUND 10: 25 seconds, 278 cash, sub upgraded 850
+    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(25))
+
+    #ROUND 11: 11.2 seconds, 42 cash, sub upgraded 425
+    upgrade_tower(1, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(11.2))
+
+    #ROUND 12: 6.3 seconds, 234 cash,
+    jtime(Level_Up_Check(6.3))
+
+    #ROUND 13: 13.2 seconds, 516 cash, ninja placed 425  
+    place_tower("NINJA", "NINJA_LOCATION", timings)
+    jtime(Level_Up_Check(13.2))
+
+    #ROUND 14: 14.1 seconds, 350 cash, ninja upgraded 255, ninja upgraded 295
+    upgrade_tower(1, "NINJA_LOCATION", timings)
+    upgrade_tower(1, "NINJA_LOCATION", timings)
+    jtime(Level_Up_Check(14.1))
+
+    #ROUND 15: 14.1 seconds, 361 cash, ninja upgraded 210, ninja upgraded 720
+    upgrade_tower(3, "NINJA_LOCATION", timings)
+    upgrade_tower(1, "NINJA_LOCATION", timings)
+    jtime(Level_Up_Check(14.1))
+
+    #ROUND 16: 8.1 seconds, 334 cash
+    jtime(Level_Up_Check(8.1))
+
+    #ROUND 17: 3 seconds, 289 cash
+    jtime(Level_Up_Check(17.3))
+
+    #ROUND 18: 14.1 seconds, 647 cash, 
+    jtime(Level_Up_Check(14.5))
+
+    #ROUND 19: 7.2 seconds, 187 cash
+    jtime(Level_Up_Check(7.2))
+
+    #ROUND 20: 3.25 seconds, 373 cash
+    jtime(Level_Up_Check(3.3))
+
+    #ROUND 21: 9.27 seconds 724 cash, 
+    jtime(Level_Up_Check(9.27))
+
+    #ROUND 22: 5.1 seconds, 1022 cash,
+    jtime(Level_Up_Check(5.1))
+
+    #ROUND 23: 4.1 seconds, 364 cash, sub upgraded 975
+    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(4.1))
+
+    #ROUND 24: 7 seconds, 559 cash
+    jtime(Level_Up_Check(7))
+
+    #ROUND 25: 6.3 seconds, 866 cash
+    jtime(Level_Up_Check(6.3))
+
+    #ROUND 26: 7.1 seconds, 1199 cash
+    jtime(Level_Up_Check(7.1))
+
+    #ROUND 27: 13.2 seconds, 1861 cash
+    jtime(Level_Up_Check(13.2))
+
+    #ROUND 28: 3.15 seconds, 2127 cash
+    jtime(Level_Up_Check(3.15))
+
+    #ROUND 29: 6.18 seconds, 2516 cash
+    jtime(Level_Up_Check(6.18))
+
+    #ROUND 30: 7 seconds, 2854 cash
+    jtime(Level_Up_Check(7))
+
+    #ROUND 31: 7 seconds, 3390 cash
+    jtime(Level_Up_Check(7))
+
+    #ROUND 32: 11.18 seconds, 4017 cash
+    jtime(Level_Up_Check(11.18))
+
+    #ROUND 33: 10.18 seconds, 4222 cash
+    jtime(Level_Up_Check(10.18))
+
+    #ROUND 34: 14.03 seconds, 5134 cash
+    jtime(Level_Up_Check(14.03))
+
+    #ROUND 35: 14.15 seconds, 6337 cash
+    jtime(Level_Up_Check(14.15))
+
+    #ROUND 36: 8.09 seconds. 7180 cash
+    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
+    jtime(Level_Up_Check(14.5))
+
+    #ROUND 37: 17.17 seconds, 8519 cash
+    jtime(Level_Up_Check(17.17))
+
+    #ROUND 38: 13.21 seconds, 9762 cash
+    jtime(Level_Up_Check(13.21))
+
+    #ROUND 39: 21.08 seconds, 9478 cash, sub upgraded 2550
+    jtime(Level_Up_Check(21.08))
 
 
 ###########################################
@@ -472,10 +658,9 @@ def XP_Main_Game():
 ###########################################[MAIN LOOP]###########################################
 while True:
     Start_Select_Map()   
-    if xp_tower_game == False:
-        Main_Game()
-    elif xp_tower_game == True:
-        XP_Main_Game()
+    # round_based_loop()
+    Main_Game()
+
     Exit_Game()
 
 

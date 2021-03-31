@@ -1,0 +1,51 @@
+#################################################[Py_AutoBloons]#######################################################
+# This if the configuration file for Py_AutoBloons
+#
+#   XP_Monkey
+#
+#   Filling this option will enable you to choose a monkey for the program to place in game.
+#   This tower will not provide any fuctionality but will help you to gain experiance points in that monkey,
+#   allowing  for quicker leveling.
+#   To see what towers are supported plese view bellow.
+#   Example:
+#       XP_Monkey: BOOMERANG
+#
+#
+#   Logging
+#
+#   This option will allow for logging to a file, everything you see in your console will be logged to "game_log.txt".
+#   This will be placed in the main directory. 
+#   Only use this option for troubleshooting and reporting bugs!
+#   Example:
+#       Logging: True
+#
+########################################################################################################################
+
+XP_Monkey:
+Logging: 
+
+
+########################################################################################################################
+#   Bellow are the monkeys that are supported using XP_Monkey:
+#
+#    DART
+#    BOOMERANG
+#    BOMB
+#    TACK
+#    ICE
+#    GLUE
+#    SNIPER
+#    ACE
+#    HELI
+#    MORTAR
+#    DARTLING
+#    WIZARD
+#    SUPER
+#    NINJA
+#    ALCHEMIST
+#    DRUID
+#    BANANA
+#    ENGINEER
+#    SPIKE
+#    VILLAGE
+########################################################################################################################

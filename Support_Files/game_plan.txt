@@ -1,0 +1,68 @@
+-----------------GAMEPLAN-----------------
+Hero obyn
+Submarine
+Submarine 1 
+Submarine 3
+Submarine 3
+Submarine 1 
+Ninja
+Ninja 1
+Ninja 1
+Ninja 3
+Ninja 1
+Submarine 3
+xp stuff tower 1
+xp stuff tower 2
+Submarine 3 round 39
+
+-----------------ROUND-----------------
+## Following time is how long it takes to clear the round
+## cash is how much is left over at end
+# fill in how much upgrades costed
+
+ROUND 1: 9 seconds, 119 cash , hero placed 550
+ROUND 2: 9.5 seconds, 252 cash, 
+ROUND 3: 10.2 seconds, 111 cash, sub placed 275
+ROUND 4: 9 seconsd, 221 cash, 
+ROUND 5: 20 seconds, 450 cash, sub upgraded 110
+ROUND 6: 10 seconds, 233 cash, sub upgraded 380
+ROUND 7: 14 seconds, 415 cash, 
+ROUND 8: 14.2 seconds, 615 cash,
+ROUND 9: 10.3 seconds,  814 cash 
+ROUND 10: 25 seconds, 278 cash, sub upgraded 850
+ROUND 11: 11.2 seconds, 42 cash, sub upgraded 425
+ROUND 12: 6.3 seconds, 234 cash,
+ROUND 13: 13.2 seconds, 516 cash,
+ROUND 14: 14.1 seconds, 350 cash, ninja placed 425  
+ROUND 15: 14.1 seconds, 361 cash, ninja upgraded 255 
+ROUND 16: 8.1 seconds, 334 cash, ninja upgraded 295
+ROUND 17: 3 seconds, 289 cash, ninja upgraded 210
+ROUND 18: 14.1 seconds, 647 cash, 
+ROUND 19: 7.2 seconds, 187 cash
+ROUND 20: 3.25 seconds, 373 cash
+ROUND 21: 9.27 seconds 724 cash, 
+ROUND 22: 5.1 seconds, 1022 cash,
+ROUND 23: 4.1 seconds, 364 cash, sub upgraded 975
+ROUND 24: 7 seconds, 559 cash
+ROUND 25: 6.3 seconds, 866 cash
+ROUND 26: 7.1 seconds, 1199 cash
+ROUND 27: 13.2 seconds, 1861 cash
+ROUND 28: 3.15 seconds, 2127 cash
+ROUND 29: 6.18 seconds, 2516 cash
+ROUND 30: 7 seconds, 2854 cash
+ROUND 31: 7 seconds, 3390 cash
+ROUND 32: 11.18 seconds, 4017 cash
+ROUND 33: 10.18 seconds, 4222 cash
+ROUND 34: 14.03 seconds, 5134 cash
+ROUND 35: 14.15 seconds, 6337 cash
+ROUND 36: 8.09 seconds. 7180 cash
+ROUND 37: 17.17 seconds, 8519 cash
+ROUND 38: 13.21 seconds, 9762 cash
+ROUND 39: 21.08 seconds, 9478 cash, sub upgraded 2550
+
+
+
+
+
+
+
