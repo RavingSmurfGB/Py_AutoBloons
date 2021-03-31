@@ -1,5 +1,6 @@
 # Py_AutoBloons
-A Python script that will beat Bloons TD 6 on Dark Castle
+A Python script that will beat Bloons TD 6 on Dark Castle.
+Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 
 ## Contents
 * [How It Works](#How_It_Works)
@@ -41,9 +42,8 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 To run this script ensure that the following upgrades are obtained and the Expert map Dark Castle is unlocked.
 Monkey        | Upgrade
 ------------- | -------------
-Submarine     | <ul><li>Longer Range</li><li>Advanced Intel</li><li>Twin Guns</li><li>Airburst Darts</li><li>Triple Guns</li><li>Armor Piercing Darts</li>
-Ninja         | <ul><li>Ninja Discipline</li><li>Sharp Shurikens</li><li>Double Shot</li><li>Seeking Shuriken</li>
-
+Submarine     | <ul><li>Longer Range  (Path 1)</li><li>Advanced Intel  (Path 1)</li><li>Twin Guns  (Path 3)</li><li>Airburst Darts  (Path 3)</li><li>Triple Guns  (Path 3)</li><li>Armor Piercing Darts  (Path 3)</li>
+Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Path 1)</li><li>Double Shot  (Path 1)</li><li>Seeking Shuriken  (Path 3)</li>
 
 ### Compatibility
 #### Resolutions officialy supported:  
