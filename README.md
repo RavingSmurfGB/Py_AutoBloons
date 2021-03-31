@@ -18,7 +18,7 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 
 
 ## Installation
-#### Automatic Install   
+### Automatic Install   
  1. Extract .zip
  2. Run setup.py
 
