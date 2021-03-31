@@ -10,19 +10,19 @@ Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
 
-### How It Works
+## How It Works
 This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
 It will use the Hero OBYN (Which will be selected auto if not), a submarine and a ninja monkey to beat the gane.  
 Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program.  
 Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like this program to automate XP gathring for monkeys.
 
 
-### Installation
+## Installation
 #### Automatic Install   
  1. Extract .zip
  2. Run setup.py
 
-#### Manual Install  
+### Manual Install  
  1. Extract .zip
  2. Open a CMD window
  3. Enter each command bellow
@@ -32,20 +32,20 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 >       pip install opencv-python
 >       pip install pyyaml
    
-### How To Use
+## How To Use
  1. Launch Bloons TD 6
  2. Double click Py_AutoBloons.py
  3. Tab back in to Bloons TD 6 within 5 seconds / ensure your cursor is over it   
  \| The Bloons TD 6 Game must be played on your primary monitor.
 
-### What Is Needed
+## What Is Needed
 To run this script ensure that the following upgrades are obtained and the Expert map Dark Castle is unlocked.
 Monkey        | Upgrade
 ------------- | -------------
 Submarine     | <ul><li>Longer Range  (Path 1)</li><li>Advanced Intel  (Path 1)</li><li>Twin Guns  (Path 3)</li><li>Airburst Darts  (Path 3)</li><li>Triple Guns  (Path 3)</li><li>Armor Piercing Darts  (Path 3)</li>
 Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Path 1)</li><li>Double Shot  (Path 1)</li><li>Seeking Shuriken  (Path 3)</li>
 
-### Compatibility
+## Compatibility
 #### Resolutions officialy supported:  
 * 1920x1080  
 * 2560x1440  
@@ -55,7 +55,7 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 \| Resolution refers to your main monitor size, not game resolution  
 \| This program was designed to work in Windows but should work in other Operating systems
 
-### XP Support
+## XP Support
 As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.  
 By default it is not active, to enable this feature edit the config.txt file follow example there.  
 All land monkeys are supported for this feature  
