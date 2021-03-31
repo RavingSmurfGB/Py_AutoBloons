@@ -56,6 +56,6 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 \| This program was designed to work in Windows but should work in other Operating systems
 
 ### XP Support
-As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.
-By default it is not active, to enable this feature edit the config.txt file follow example there.
-All land monkeys are supported for this feature
+As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.  
+By default it is not active, to enable this feature edit the config.txt file follow example there.  
+All land monkeys are supported for this feature  
