@@ -1,16 +1,18 @@
 # Py_AutoBloons
-A Python script that will auto run Bloons TD 6 on Dark Castle
+A Python script that will beat Bloons TD 6 on Dark Castle
 
 ## Contents
 * [How It Works](#How_It_Works)
 * [Installation](#Installation)
 * [How To Use](#How_To_Use)
-* [Monkey Upgrades](Monkey_Upgrades_Needed)
+* [What Is Needed](#What_Is_Needed)
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
 
 ### How It Works
-
+This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
+It will also change to the Hero OBYN, if not already selected. Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program/.  
+This program also supports gaining levels for all land based monkeys, please see [What Is Needed](#What_Is_Needed)  
 
 ### Installation
 #### Automatic Install   
@@ -29,7 +31,7 @@ A Python script that will auto run Bloons TD 6 on Dark Castle
    
 ### How To Use
 
-### Monkey Upgrades Needed
+### What Is Needed
 
 ### Compatibility
 Resolutions officialy supported:  
