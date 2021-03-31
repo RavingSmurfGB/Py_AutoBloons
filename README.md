@@ -11,8 +11,10 @@ A Python script that will beat Bloons TD 6 on Dark Castle
 
 ### How It Works
 This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
-It will also change to the Hero OBYN, if not already selected. Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program/.  
-This program also supports gaining levels for all land based monkeys, please see [What Is Needed](#What_Is_Needed)  
+It will use the Hero OBYN (Which will be selected auto if not), a submarine and a ninja monkey to beat the gane.  
+Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program.  
+Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like this program to automate XP gathring for monkeys.
+
 
 ### Installation
 #### Automatic Install   
