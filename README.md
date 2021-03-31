@@ -9,10 +9,10 @@ A Python script that will auto run Bloons TD 6 on Dark Castle
 * [XP Support](#XP_Support)
 
 ### Installation
-*Automatic Install*  
+*  Automatic Install*  
 > 1. Hi there
 > 
-Manual Install  
+*  Manual Install*  
 > 1. Hi
 ### How To Use
 
