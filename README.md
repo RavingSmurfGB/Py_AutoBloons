@@ -2,15 +2,19 @@
 A Python script that will auto run Bloons TD 6 on Dark Castle
 
 ## Contents
-* [Instalation](#Instalation)
-* [Technologies](#technologies)
-* [Setup](#setup)
+* [Installation](#Installation)
+* [How To Use](#How To Use)
+* [Monkey Upgrades Needed](Monkey Upgrades Needed)
+* [Compatibility](#Compatibility)
+* [XP Support](#XP Support)
 
-### Instalation
+### Installation
 
+### How To Use
 
+### Monkey Upgrades Needed
 
-### Compatibility:
+### Compatibility
 Resolutions officialy supported:
 1920x1080
 2560x1440
@@ -19,11 +23,7 @@ Resolutions officialy supported:
 ** Resolution refers to your main monitor size, not game resolution
 
 
-XP gathering:
+### XP Support
 not supported on boats/ submarines.
 
-
-
-Tips:
-Any hero can be used, but was designed around quincy
 
