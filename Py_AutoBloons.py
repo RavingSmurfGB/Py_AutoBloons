@@ -279,13 +279,13 @@ def Level_Up_Check(seconds):
         time.sleep(2)  
         press_key("space") # Start the game
         time.sleep(1)
-        press_key("space") # Fast forward the game
+        #press_key("space") # Fast forward the game
 
     #get second time here
     seconds_after = time.time()
     time_dif = seconds_after - seconds_before # we calculate the difference of time that was used in this function
 
-    
+
     
     seconds = seconds - time_dif # we take away the time differance from seconds # how long the script should now wait
 
@@ -311,6 +311,10 @@ def easter_event_check():
         click("F_LEFT_INSTA")
         time.sleep(1)
         click("F_LEFT_INSTA")
+        time.sleep(1)
+        click("MID_INSTA") # unlock insta
+        time.sleep(1)
+        click("MID_INSTA") # collect insta
         time.sleep(1)
         click("F_RIGHT_INSTA")
         time.sleep(1)
