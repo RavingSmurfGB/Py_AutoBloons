@@ -61,8 +61,11 @@ def on_click(x, y, button, pressed):
         elif pressed == False:
             updown = "Released"
 
-        location = (x, y) # location simply states where the mouse click event was
-        time = datetime.now().strftime("%H:%M:%S") # we get the time of the events
+
+
+        location = (x, y)
+        time = datetime.now().strftime("%H:%M:%S")
+
 
         eventclickArray = [time, updown, location,]
 
