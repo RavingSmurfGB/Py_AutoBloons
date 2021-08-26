@@ -1,4 +1,4 @@
-import pyautogui, time, termcolor, yaml, pathlib
+import pyautogui, time, termcolor, yaml, pathlib, os
 from datetime import datetime
 
 ###########################################[TO DO]###########################################
@@ -46,18 +46,25 @@ from datetime import datetime
 
 
 ###########################################[SETUP]###########################################
-if pathlib.Path("config.txt").is_file():
+
+
+current_directory = os.getcwd()
+
+if "Joe" in current_directory: # Bodge to fix creator's github repo folders...
+    current_directory = current_directory + "\\Py_AutoBloons\\"
+
+print(current_directory + "config.txt")
+
+
+if pathlib.Path(current_directory + "config.txt").is_file():
+    print("Cannot find file")
     pass
 else:
-    with open("config.txt", "w") as file: # Open the file as read
+    with open(current_directory + "config.txt", "w") as file: # Open the file as read
         pass
 
-'''
-with open("config.txt", ) as stream:
-    out = yaml.load(stream)
-    print(out['XP_Monkey']['Logging'])
-'''
-with open("config.txt") as file: # Open the file as read
+
+with open(current_directory + "config.txt") as file: # Open the file as read
     config_file = yaml.load(file, Loader=yaml.FullLoader) # Set the contents to = tmp_current_dictionary
 
 for key, value in config_file.items():
@@ -82,12 +89,12 @@ if logging == True:
         file.write("\n" + dt_string + " -- STARTUP \n")# writes to log new startup, includes date/time
 
 width, height = pyautogui.size()
-path = "Support_Files\\" + str(height) + "_levelup.png"
-victory_path = "Support_Files\\" + str(height) + "_victory.png"
-defeat_path = "Support_Files\\" + str(height) + "_defeat.png"
-menu_path = "Support_Files\\" + str(height) + "_menu.png"
-easter_path = "Support_Files\\" + str(height) + "_easter.png"
-obyn_hero_path = "Support_Files\\" + str(height) + "_obyn.png"
+path = current_directory + "Support_Files\\" + str(height) + "_levelup.png"
+victory_path = current_directory + "Support_Files\\" + str(height) + "_victory.png"
+defeat_path = current_directory + "Support_Files\\" + str(height) + "_defeat.png"
+menu_path = current_directory + "Support_Files\\" + str(height) + "_menu.png"
+easter_path = current_directory + "Support_Files\\" + str(height) + "_easter.png"
+obyn_hero_path = current_directory + "Support_Files\\" + str(height) + "_obyn.png"
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
 monkeys = {
@@ -141,7 +148,7 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "HOME_MENU_START" : [1123, 1248],
     "EXPERT_SELECTION" : [1778, 1304],
     "RIGHT_ARROW_SELECTION" : [2193, 582],
-    "DARK_CASTLE" : [720, 350],
+    "DARK_CASTLE" : [1420, 350], # changed to (x=1941, y=513) in latest patch
     "EASY_MODE" : [838, 550],
     "STANDARD_GAME_MODE" : [847,780],
     "OVERWRITE_SAVE" : [1520, 974],
