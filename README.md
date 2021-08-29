@@ -66,7 +66,7 @@ As mentioned this program can automatically gain XP for towers, this is relative
 By default it is not active, to enable this feature edit the config.txt file follow example there.  
 All land monkeys are supported for this feature  
 
-## Recording your own play through
+## Recording Playthroughs
 Not yet fully implemented!!!!
 With the file "gameplan_recorder" it is possible to build your own play through that "Py_AutoBloons" will use to beat dark castle!!
 This is stored by defualt as "gameplan.csv" and can be specified to use in config.txt, however the "gameplan.csv" will need to be in the same folder as "Py_AutoBloons.py"
