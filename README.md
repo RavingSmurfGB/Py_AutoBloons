@@ -1,4 +1,8 @@
 # Py_AutoBloons
+This Script is undergoing a re-write, to make creating your own level designs easier and optimising the way to record a gameplan.
+Stay tuned for further updates!
+
+
 A Python script that will beat Bloons TD 6 on Dark Castle.  
 Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 
@@ -9,6 +13,8 @@ Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 * [What Is Needed](#What_Is_Needed)
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
+* [Recording your own play through](#Recording your own play through)
+
 
 ## How It Works
 This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
@@ -60,3 +66,17 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.  
 By default it is not active, to enable this feature edit the config.txt file follow example there.  
 All land monkeys are supported for this feature  
+
+## Recording your own play through
+Not yet fully implemented!!!!
+With the file "gameplan_recorder" it is possible to build your own play through that "Py_AutoBloons" will use to beat dark castle!!
+This is stored by defualt as "gameplan.csv" and can be specified to use in config.txt, however the "gameplan.csv" will need to be in the same folder as "Py_AutoBloons.py"
+Currently auto hero selection only works for Obyn if you would like to use a different hero, disable auto hero select in the config file
+
+If you are interested in recording your own gameplan to beat dark castle, timing is very important, try to give yourself a little extra time before buying upgrades to ensure that on another playthrough you will have enough money to buy the same upgrade.
+
+You should start the recorder once you have loaded in to dark castle, you will have to click the play button in the recording.
+You should end the recorder once you see the victory screen, do not click anything once the victory screen loads and give an extra minute or two to account for differances in play throughs
+### Insert pictures of start and end 
+### Create a video to show how to use it
+

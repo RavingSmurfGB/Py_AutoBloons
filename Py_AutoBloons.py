@@ -1,38 +1,20 @@
-import pyautogui, time, termcolor, yaml, pathlib, os
+import pyautogui, time, termcolor, yaml, pathlib, os, csv
 from datetime import datetime
 
 ###########################################[TO DO]###########################################
-# BASICS
-#   Store positions in dictionary and referance them via name(key)                      Done
-#   Have functions that:
-#       Can click and accept button_positions                                           Done    
-#       Can place monkey (probably made up of other function)                           Done
-#   Have code start game                                                                Done
-#   Have code beat game                                                                 Done
-#   Have code exit to main menu                                                         Done   
-#   Loop all above in function                                                          Done
-#   Also we will need to find a way to auto accept levels                               Done
-
 
 # SETUP
 #   have a setup file that installs requirements    
 
+# NEW GAMEPLAN
+#   Implement a gameplan_reader
+#       Implement config file for reader
+#           key to stop recording
+#           file path for save
+#   Disable auto hero select in config.txt
+#   Send clicks to the game without it being in front!
 
 
-# OTHER
-#   Use hotkey to quit (ctrl+esc), 
-#   Different colour text output :)                                                     Done
-#   write good readme
-#   implement passive xp gain                                                           Done
-#       pass in tower to placem, it places it                                           Done
-
-
-
-# Implement new game plan
-#   move new loop to main function                                                      Done
-#   implement xp mode                                                                   Done
-#   hero check for obyn when first launch                                               Done
-#       if not detected the select em                                                   Done
 #   on each round change call levelcheck()
 #   implement config file to:
 #       enable loging
@@ -226,6 +208,12 @@ def scaling(pos_list):
     #print(" Me with padding -- " + str([x]))
     return [x, y]
 
+
+
+
+
+
+
 def jprint(message):
 
     # print(termcolor.colored("hi", "green")) 
@@ -255,7 +243,6 @@ def jtime(seconds):
     time.sleep(seconds)
 
 def Level_Up_Check(seconds):
-
 
     #get first time here
     seconds_before = time.time()
@@ -300,6 +287,7 @@ def Level_Up_Check(seconds):
         seconds = 0
 
     return seconds
+    
 
 def easter_event_check():
     found = pyautogui.locateOnScreen(easter_path, confidence=0.9)
@@ -407,9 +395,7 @@ def hero_obyn_check():
         press_key("esc")
 
 
-jprint("Starting code, move cursor over bloons in the next 5 seconds")
-time.sleep(3)
-hero_obyn_check()
+
 
 
 ###########################################
@@ -435,6 +421,60 @@ def Start_Select_Map():
     click("STANDARD_GAME_MODE") # Move mouse to select Standard mode
     click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
     
+
+
+
+
+
+
+
+
+
+
+def New_Main_Game():
+
+   
+    gameplanArray = []
+    gameplanFile = "gameplan.csv"
+    with open(gameplanFile, newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+
+
+        for row in spamreader: 
+            gameplanArray.append(row) # We build an array of the list in each row
+            # This is used as to not keep the file open in case of a program crash..
+
+
+    print(gameplanArray)
+
+    for line in gameplanArray:
+        print(line)
+
+            #print("do something here!!")
+            
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def Main_Game():
     jprint(" STATUS -- Starting main game")
@@ -667,6 +707,14 @@ def round_based_loop():
 
 
 ###########################################[MAIN LOOP]###########################################
+#New_Main_Game()
+
+
+
+jprint("Starting code, move cursor over bloons in the next 5 seconds")
+time.sleep(3)
+hero_obyn_check()
+
 while True:
     Start_Select_Map()   
     # round_based_loop()
