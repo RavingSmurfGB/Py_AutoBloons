@@ -15,6 +15,7 @@ from datetime import datetime
 #   XP monkey support will have to be coded individually with different gameplans!!
 #       or keep the old playthrough and specify if statements for each xp monkey :P
 #   re-create the scaling code in an example and fully document for easy understanding!!
+#   Fix the github contents links!
 #   Send clicks to the game without it being in front!
 
 
