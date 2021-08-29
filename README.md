@@ -12,7 +12,7 @@ Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 * [What Is Needed](#What_Is_Needed)
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
-* [Recording your own play through](#Recording your own play through)
+* [Recording Playthroughs](#Recording_Playthroughs)
 
 
 ## How It Works
