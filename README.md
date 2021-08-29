@@ -1,7 +1,6 @@
 # Py_AutoBloons
-This Script is undergoing a re-write, to make creating your own level designs easier and optimising the way to record a gameplan.
-Stay tuned for further updates!
-
+ *This Script is undergoing a re-write, to make creating your own level designs easier and optimising the way to record a gameplan.
+Stay tuned for further updates!*.
 
 A Python script that will beat Bloons TD 6 on Dark Castle.  
 Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
