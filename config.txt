@@ -19,10 +19,27 @@
 #   Example:
 #       Logging: True
 #
+#
+#   Gameplan_file - not fully implemented
+#   
+#   This option allows for user configurable gameplans, once it has been recorded with gameplan_recorder.py copy the gameplan.csv into the same folder as Py_AutoBloons.py
+#   Then simply specify the file name, feel free to rename the .csv file but make sure the value below matches this config file.
+#   Example:
+#       Gameplan_file: gameplan.csv
+#
+#
+#   Auto_Hero_Select - not fully implemented
+#   This options disables automatically selecting Obyn as a hero once the program starts. This is mainly used if a user has created their own gameplan.
+#   By defualt this option is True, even if blank in this file.
+#   Example:   
+#       Auto_Hero_Select: False
+#
 ########################################################################################################################
 
 XP_Monkey: BOOMERANG
 Logging: 
+Gameplan_file:
+Auto_Hero_Select:
 
 
 ########################################################################################################################

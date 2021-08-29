@@ -8,7 +8,7 @@ from datetime import datetime
 
 # NEW GAMEPLAN
 #   Implement a gameplan_reader
-#       Implement config file for reader
+#       Implement terminal questions for:
 #           key to stop recording
 #           file path for save
 #   Disable auto hero select in config.txt
@@ -20,11 +20,6 @@ from datetime import datetime
 
 
 #   on each round change call levelcheck()
-#   implement config file to:
-#       enable loging
-#       select xp tower
-#           when xp tower is set, xp_tower_game should = True
-#   Under game_plan.txt, time every round, and not how much money there is 
 #   implement verbose instamonkey collection on lvl up
 
 
@@ -34,8 +29,9 @@ from datetime import datetime
 ###########################################[SETUP]###########################################
 
 
-current_directory = os.getcwd()
 
+# Config file loading...
+current_directory = os.getcwd()
 if "Joe" in current_directory: # Bodge to fix creator's github repo folders...
     current_directory = current_directory + "\\Py_AutoBloons\\"
 
@@ -48,6 +44,7 @@ if pathlib.Path(current_directory + "config.txt").is_file():
 else:
     with open(current_directory + "config.txt", "w") as file: # Open the file as read
         pass
+
 
 
 with open(current_directory + "config.txt") as file: # Open the file as read
@@ -66,6 +63,16 @@ for key, value in config_file.items():
         else:
             xp_tower_game = True
             xp_tower = value
+    if key == "Gameplan_file": 
+        if value == None:
+            gameplanFile = "gameplan.csv" # load the defualt plan
+        else:
+            gameplanFile = value # assign the new value
+    if key == "Auto_Hero_Select":
+        if value == False:
+            autohero_select = False
+        else:
+            autohero_select = True
     print(key, value) 
 
 
@@ -73,6 +80,26 @@ if logging == True:
     dt_string = datetime.now().strftime("%H:%M:%S")
     with open("game_log.txt", "a+") as file: #open's the file to allow it to be written to
         file.write("\n" + dt_string + " -- STARTUP \n")# writes to log new startup, includes date/time
+
+
+
+
+def build_gameplan():
+    gameplanArray = []
+    gameplanFile = "gameplan.csv"
+    with open(gameplanFile, newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+
+
+        for row in spamreader: 
+            gameplanArray.append(row) # We build an array of the list in each row
+            # This is used as to not keep the file open in case of a program crash..
+
+
+
+
+
+
 
 width, height = pyautogui.size()
 path = current_directory + "Support_Files\\" + str(height) + "_levelup.png"
