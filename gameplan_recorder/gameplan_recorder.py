@@ -2,7 +2,7 @@ from pynput.mouse import Listener as MouseListener
 from pynput.keyboard import Listener as KeyboardListener
 from datetime import datetime
 from pynput import mouse
-import csv, os, time
+import csv, os, time, pyautogui
 
 
 '''
@@ -11,6 +11,8 @@ We base this recording script from the main srcipt able to mouse up and mouse do
 pyautogui.mouseDown(button='right')  # press the right button down
 pyautogui.mouseUp(button='right', x=100, y=200)  # move the mouse to 100, 200, then release the right button up.
 '''
+
+#   RECORD MILLISCEONDS ASWELL!!!!
 
 #Main variables
 gameplanArray = [] # Used as the full gamplan, containing time, press and location
@@ -25,13 +27,25 @@ print("Use the ", end_key, " key to stop recording")
 print("\n")
 time.sleep(0.5)
 
+
+
+
 file_save = input("Enter the name of the recording : ") or "gameplan.csv" # Where should the data recorded be saved
 if ".csv" not in file_save: # Check for the csv extension
     file_save = file_save + ".csv" # if not in add it..
-file_path = os.getcwd() + "\\" + file_save
+
+file_path = os.getcwd()
+if "DESKTOP-7HL22EH" in os.environ['COMPUTERNAME']: # Bodge to fix creator's github repo folders...
+
+    file_path = file_path + "\\Py_AutoBloons"
+file_path = file_path + "\\" + file_save
+
+
 print("The file will be saved to ", file_path )
 print("\n")
 time.sleep(0.5)
+
+
 
 
 def on_press(key):
@@ -46,7 +60,7 @@ def on_press(key):
         print("The recorder will now end, saving to file...")
         
 
-        with open(file_save, 'w', newline='') as csvfile:
+        with open(file_path, 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=' ',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             for line in gameplanArray:
@@ -70,6 +84,7 @@ def on_click(x, y, button, pressed):
     #   eventclickArray - this is used to join, updown, location and  time
     #   gameplanArray - we add the eventclickArray to this 
     #   actual_time - Used to calculate time_diff and saved to gameplanArray
+    #   resolution - Uused for scaling logic in Py_autobloons, contains height & width
 
 
     if button == mouse.Button.left:  # We check if the left button is pressed
@@ -80,7 +95,7 @@ def on_click(x, y, button, pressed):
             updown = "Released"
 
         location = (x, y) # Assign location the X and Y of the mouse cursor
-        time = datetime.now().strftime("%H:%M:%S") # Returns the current time as a string
+        time = datetime.now().strftime("%H:%M:%S.%f") # Returns the current time as a string
         actual_time = time # We store the actual_time as a seperate variable
 
 
@@ -88,22 +103,28 @@ def on_click(x, y, button, pressed):
         if array_length != 0: # If the gameplanArray is empty then do nothing, 
             array_length -= 1 # We have to minus one, as arrays are indexed from 0 but length start from 1
 
-            timeDT = datetime.strptime(time,"%H:%M:%S") # We convert the current time to a date time object
+            timeDT = datetime.strptime(time,"%H:%M:%S.%f") # We convert the current time to a date time object
 
-            row_before_timeDT = datetime.strptime(gameplanArray[array_length][3],"%H:%M:%S") # We get the last actual_time and convert it to a date time object
+            row_before_timeDT = datetime.strptime(gameplanArray[array_length][3],"%H:%M:%S.%f") # We get the last actual_time and convert it to a date time object
 
             time_diff =  timeDT - row_before_timeDT # We take away current time from previous time...
-            time_diff = str(time_diff)# We convert time_diff to a string
+
+            time_diff = str(time_diff.total_seconds())# We convert time_diff to a string and only capture the total amount of seconds
+            
            
         
         elif array_length == 0:# On the first iteration, it is not possible to see the time before,
-            time_diff = "0:00:00" # we simply set the time_diff to 0
+            time_diff = "0" # we simply set the time_diff to 0
+
+        #time_diff = sum(x * int(t) for x, t in zip([3600, 60, 1], time_diff.split(":"))) # We convert the time string in to a integer before saving
 
 
-        
-        eventclickArray = [time_diff, updown, location, actual_time] # Assign all the variables to a list
+        width, height = pyautogui.size()
+        resolution = (width, height)# we capture the resolution and add it to the eventclickArray, this is used for scaling logic in Py_autobloons
+        eventclickArray = [time_diff, updown, location, actual_time, resolution] # Assign all the variables to a list
         print("Mouse Event captured at - " , location)
         gameplanArray.append(eventclickArray)# Add eventclickArray to gameplanArray
+
 
 
 

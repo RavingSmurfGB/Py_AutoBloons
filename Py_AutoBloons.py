@@ -11,11 +11,16 @@ from datetime import datetime
 #       Implement terminal questions for:
 #           key to stop recording
 #           file path for save
+#       move gameplan save location to under gameplan recorder
+#
+#   ISSUE : Current gameplan_recording will only work to play back on same aspect ratios, we arent able to remove padding e.g. 16.9 - 16.9 = good, 21.9 - 16.9 = bad
+#
 #   Disable auto hero select in config.txt
 #   XP monkey support will have to be coded individually with different gameplans!!
 #       or keep the old playthrough and specify if statements for each xp monkey :P
 #   re-create the scaling code in an example and fully document for easy understanding!!
 #   Fix the github contents links!
+#   Implement key to stop the script
 #   Send clicks to the game without it being in front!
 
 
@@ -29,19 +34,20 @@ from datetime import datetime
 ###########################################[SETUP]###########################################
 
 
-
+os.system('cls||clear')
 # Config file loading...
 current_directory = os.getcwd()
-if "Joe" in current_directory: # Bodge to fix creator's github repo folders...
+if "DESKTOP-7HL22EH" in os.environ['COMPUTERNAME']: # Bodge to fix creator's github repo folders...
     current_directory = current_directory + "\\Py_AutoBloons\\"
 
-print(current_directory + "config.txt")
+print("Loading config file - " , current_directory + "config.txt")
 
 
 if pathlib.Path(current_directory + "config.txt").is_file():
-    print("Cannot find file")
+    
     pass
 else:
+    print("Cannot find file")
     with open(current_directory + "config.txt", "w") as file: # Open the file as read
         pass
 
@@ -66,14 +72,19 @@ for key, value in config_file.items():
     if key == "Gameplan_file": 
         if value == None:
             gameplanFile = "gameplan.csv" # load the defualt plan
+            file_path = os.getcwd()
+            if "DESKTOP-7HL22EH" in os.environ['COMPUTERNAME']: # Bodge to fix creator's github repo folders..
+                gameplanFile = file_path + "\\Py_AutoBloons" "\\" + gameplanFile
+
         else:
             gameplanFile = value # assign the new value
+        print(file_path)
     if key == "Auto_Hero_Select":
         if value == False:
-            autohero_select = False
+            auto_hero_select = False
         else:
-            autohero_select = True
-    print(key, value) 
+            auto_hero_select = True
+ 
 
 
 if logging == True:
@@ -82,11 +93,9 @@ if logging == True:
         file.write("\n" + dt_string + " -- STARTUP \n")# writes to log new startup, includes date/time
 
 
-
-
+gameplanArray = [] # We create a global variable to build the gameplan
 def build_gameplan():
-    gameplanArray = []
-    gameplanFile = "gameplan.csv"
+    
     with open(gameplanFile, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
 
@@ -138,24 +147,7 @@ monkeys = {
 
 
 
-reso_16 = [
-    {
-        "width": 1280,
-        "height": 720        
-    },
-    {
-        "width": 1920,
-        "height": 1080
-    },
-    {
-        "width": 2560,
-        "height": 1440
-    },
-    {
-        "width": 3840,
-        "height": 2160
-    }
-]
+
 
 button_positions = { # Creates a dictionary of all positions needed for monkeys (positions mapped to 2160 x 1440 resolution)
     "HOME_MENU_START" : [1123, 1248],
@@ -196,6 +188,25 @@ upgrade_path = {
 
 }
 
+reso_16 = [
+    {
+        "width": 1280,
+        "height": 720        
+    },
+    {
+        "width": 1920,
+        "height": 1080
+    },
+    {
+        "width": 2560,
+        "height": 1440
+    },
+    {
+        "width": 3840,
+        "height": 2160
+    }
+]
+
 def padding():
 # Get's width and height of current resolution
 # we iterate through reso_16 for heights, if current resolution height matches one of the entires 
@@ -216,8 +227,9 @@ def padding():
 
     return pad
 
-def scaling(pos_list):
-# This function will dynamically calculate the differance between current resolution and designed for 2560x1440
+def scaling(location, orignal_resolution):
+# This function will dynamically calculate the differance between current resolution and the script which is designed for 2560x1440
+# However with the implementation of gameplan_recorder this will not work for anything other than my resolution
 # it will also add any padding needed to positions to account for 21:9 
 
 # do_padding -- this is used during start 
@@ -227,16 +239,16 @@ def scaling(pos_list):
         if height == x['height']:
             if width != x['width']:
                 reso_21 = True
-                x = pos_list[0]
+                x = location[0]
                 break
-    if reso_21 != True:
-        x = pos_list[0]/2560 
-        x = x * width
-    y = pos_list[1]/1440
-    y = y * height
-    #print(" Me wihout padding " + str([x]))
-    x = x + padding() # Add's the pad to to the curent x position variable
-    #print(" Me with padding -- " + str([x]))
+    if reso_21 != True: # If the current resolution is not 16:9
+        x = location[0]/orignal_resolution[0] # We divide the width(x) of where the mouse should click by the orignal resolution
+        x = x * width # we then multiply the width(x) by the width of the current resolution
+    y = location[1]/orignal_resolution[1] # We divide the height(y) of where the mouse should click by the orignal resolution
+    y = y * height # we then multiply the height(y) by the height of the current resolution
+
+ 
+    x = x + padding() # Add's the pad to to the curent x position variable, used for 21:9 resolutions
     return [x, y]
 
 
@@ -417,13 +429,14 @@ def tmp_scaling(pos_list): # used for easter event, to exit the main menu but wi
 
 
 def hero_obyn_check():
-    found = pyautogui.locateOnScreen(obyn_hero_path, confidence=0.9)
-    if found == None:
-        jprint("STATUS -- Hero not detected, changing hero")
-        click("HERO_SELECT")
-        click("SELECT_OBYN")
-        click("CONFIRM_HERO")
-        press_key("esc")
+    if auto_hero_select == True:
+        found = pyautogui.locateOnScreen(obyn_hero_path, confidence=0.9)
+        if found == None:
+            jprint("STATUS -- Hero not detected, changing hero")
+            click("HERO_SELECT")
+            click("SELECT_OBYN")
+            click("CONFIRM_HERO")
+            press_key("esc")
 
 
 
@@ -458,40 +471,51 @@ def Start_Select_Map():
 
 
 
+def click_updown(locationxy, updown, orignal_resolution):
+    print(locationxy)
+    scaling_location = scaling(locationxy, orignal_resolution)
+    print(scaling_location)
+    if updown == "Pressed":
+        
+        #pyautogui.moveTo(scaling_location[0], scaling_location[1])
+        pyautogui.moveTo(scaling_location[0], scaling_location[1])
+        time.sleep(0.2)
+        pyautogui.mouseDown(button='left')
+
+            
+    elif updown == "Released":
+        #pyautogui.dragTo(scaling_location[0], scaling_location[1], 0.3,button='left')
+        pyautogui.moveTo(scaling_location[0], scaling_location[1])
+        time.sleep(0.2)
+        pyautogui.mouseUp(button='left')
+
+
+    
+
+
 
 
 
 
 def New_Main_Game():
-
-   
-    gameplanArray = []
-    gameplanFile = "gameplan.csv"
-    with open(gameplanFile, newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-
-
-        for row in spamreader: 
-            gameplanArray.append(row) # We build an array of the list in each row
-            # This is used as to not keep the file open in case of a program crash..
-
-
-    print(gameplanArray)
-
+    time.sleep(3)
     for line in gameplanArray:
         print(line)
+        time_delay = float(line[0])# We convert the time delay to a float to enable milliseonds
+        print(time_delay)
+        print(type(time_delay))
+        updown = line[1]
+        #locationxy = line[2]
+        locationxy = eval(line[2]) # We get the location of 
+        orignal_resolution = eval(line[4]) # We get the location of 
+        click_updown(locationxy, updown, orignal_resolution )
+        if time_delay == 0:
+            time_delay = 0.5
+        time.sleep(time_delay)
+          
 
-            #print("do something here!!")
-            
-
-
-
-
-
-
-            
-
-
+# CURRENT ISSUE - drag towers seems to not work # seems to be that the mouse up command is not triggering the tower to place # worked around by seperating the move command and click command
+#       timing also seems to  still be an issue
 
 
 
@@ -738,10 +762,11 @@ def round_based_loop():
 
 
 ###########################################[MAIN LOOP]###########################################
-#New_Main_Game()
+build_gameplan()
+New_Main_Game()
 
 
-
+'''
 jprint("Starting code, move cursor over bloons in the next 5 seconds")
 time.sleep(3)
 hero_obyn_check()
@@ -752,7 +777,7 @@ while True:
     Main_Game()
 
     Exit_Game()
-
+'''
 
 
 ###########################################
