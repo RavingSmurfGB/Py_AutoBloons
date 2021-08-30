@@ -14,16 +14,24 @@ pyautogui.mouseUp(button='right', x=100, y=200)  # move the mouse to 100, 200, t
 
 #Main variables
 gameplanArray = [] # Used as the full gamplan, containing time, press and location
-end_key = "`" # Defines the key used to end the script
-file_save = "gameplan.csv" # Where should the data recorded be saved
-file_path = os.getcwd() + "\\" + file_save
 
 
+
+os.system('cls||clear')
 print("Recorder Starting...")
-time.sleep(0.5)
+
+end_key = input("Enter the key you wish to use to end recording : ") or "`" # Defines the key used to end the script
 print("Use the ", end_key, " key to stop recording")
+print("\n")
 time.sleep(0.5)
+
+file_save = input("Enter the name of the recording : ") or "gameplan.csv" # Where should the data recorded be saved
+if ".csv" not in file_save: # Check for the csv extension
+    file_save = file_save + ".csv" # if not in add it..
+file_path = os.getcwd() + "\\" + file_save
 print("The file will be saved to ", file_path )
+print("\n")
+time.sleep(0.5)
 
 
 def on_press(key):
