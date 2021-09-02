@@ -12,7 +12,6 @@ pyautogui.mouseDown(button='right')  # press the right button down
 pyautogui.mouseUp(button='right', x=100, y=200)  # move the mouse to 100, 200, then release the right button up.
 '''
 
-#   RECORD MILLISCEONDS ASWELL!!!!
 
 #Main variables
 gameplanArray = [] # Used as the full gamplan, containing time, press and location
@@ -43,18 +42,20 @@ file_path = file_path + "\\" + file_save
 
 print("The file will be saved to ", file_path )
 print("\n")
-time.sleep(0.5)
+
 
 
 
 
 def on_press(key):
+
     # This function monitors for key presses, if it matches the end_key, it will write the gameplanArray to the file and close the program
     #
     # Variables used:
     #   gameplanArray - we add the eventclickArray to this and save to file
     #   file_save - The location where we save the gameplan to
     #   end_key - is the key that is pressed to trigger the if statement
+
 
     if key.char == end_key:
         print("The recorder will now end, saving to file...")
@@ -74,6 +75,7 @@ def on_press(key):
 
 
 def on_click(x, y, button, pressed):
+
     # This function is used to gather data about the click and release events, then feed back in to the gameplanArray
     #
     # Variables used:
@@ -90,41 +92,42 @@ def on_click(x, y, button, pressed):
     if button == mouse.Button.left:  # We check if the left button is pressed
   
         if pressed == True: #if the button was pressed or released we assign it to the variable updown
-            updown = "Pressed"
-        elif pressed == False:
-            updown = "Released"
-
-        location = (x, y) # Assign location the X and Y of the mouse cursor
-        time = datetime.now().strftime("%H:%M:%S.%f") # Returns the current time as a string
-        actual_time = time # We store the actual_time as a seperate variable
-
-
-        array_length = len(gameplanArray) # This line is used to see how big the array is
-        if array_length != 0: # If the gameplanArray is empty then do nothing, 
-            array_length -= 1 # We have to minus one, as arrays are indexed from 0 but length start from 1
-
-            timeDT = datetime.strptime(time,"%H:%M:%S.%f") # We convert the current time to a date time object
-
-            row_before_timeDT = datetime.strptime(gameplanArray[array_length][3],"%H:%M:%S.%f") # We get the last actual_time and convert it to a date time object
-
-            time_diff =  timeDT - row_before_timeDT # We take away current time from previous time...
-
-            time_diff = str(time_diff.total_seconds())# We convert time_diff to a string and only capture the total amount of seconds
-            
-           
+            #updown = "Pressed"
         
-        elif array_length == 0:# On the first iteration, it is not possible to see the time before,
-            time_diff = "0" # we simply set the time_diff to 0
+            location = (x, y) # Assign location the X and Y of the mouse cursor
+            time = datetime.now().strftime("%H:%M:%S.%f") # Returns the current time as a string
+            actual_time = time # We store the actual_time as a seperate variable
 
-        #time_diff = sum(x * int(t) for x, t in zip([3600, 60, 1], time_diff.split(":"))) # We convert the time string in to a integer before saving
+
+            array_length = len(gameplanArray) # This line is used to see how big the array is
+            if array_length != 0: # If the gameplanArray is empty then do nothing, 
+                array_length -= 1 # We have to minus one, as arrays are indexed from 0 but length start from 1
+
+                timeDT = datetime.strptime(time,"%H:%M:%S.%f") # We convert the current time to a date time object
+
+                row_before_timeDT = datetime.strptime(gameplanArray[array_length][2],"%H:%M:%S.%f") # We get the last actual_time and convert it to a date time object
+
+                time_diff =  timeDT - row_before_timeDT # We take away current time from previous time...
+
+                time_diff = str(round(time_diff.total_seconds(), 2))# We convert time_diff to a string and only capture the total amount of seconds, we also round the time to 2 places
+                
+            
+            
+            elif array_length == 0:# On the first iteration, it is not possible to see the time before,
+                time_diff = "0" # we simply set the time_diff to 0
+
+            #time_diff = sum(x * int(t) for x, t in zip([3600, 60, 1], time_diff.split(":"))) # We convert the time string in to a integer before saving
 
 
-        width, height = pyautogui.size()
-        resolution = (width, height)# we capture the resolution and add it to the eventclickArray, this is used for scaling logic in Py_autobloons
-        eventclickArray = [time_diff, updown, location, actual_time, resolution] # Assign all the variables to a list
-        print("Mouse Event captured at - " , location)
-        gameplanArray.append(eventclickArray)# Add eventclickArray to gameplanArray
+            width, height = pyautogui.size()
+            resolution = (width, height)# we capture the resolution and add it to the eventclickArray, this is used for scaling logic in Py_autobloons
+            eventclickArray = [time_diff, location, actual_time, resolution] # Assign all the variables to a list
+            print("Mouse Event captured at - " , location)
+            gameplanArray.append(eventclickArray)# Add eventclickArray to gameplanArray
 
+    
+
+        
 
 
 
