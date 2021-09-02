@@ -471,47 +471,9 @@ def Start_Select_Map():
 
 
 
-def click_updown(locationxy, orignal_resolution):
-    #print(locationxy)
-    scaling_location = scaling(locationxy, orignal_resolution)
-    #print(scaling_location)
-
-    #pyautogui.moveTo(scaling_location[0], scaling_location[1])
-
-    pyautogui.moveTo(scaling_location[0], scaling_location[1])
-    
-    
-    #pyautogui.mouseDown(button='left')
-    pyautogui.click(button='left')
-
-            
 
 
-'''
-def click_updown(locationxy, updown, orignal_resolution):
-    print(locationxy)
-    scaling_location = scaling(locationxy, orignal_resolution)
-    print(scaling_location)
-    if updown == "Pressed":
-        
-        #pyautogui.moveTo(scaling_location[0], scaling_location[1])
-        pyautogui.moveTo(scaling_location[0], scaling_location[1])
-        
-        time.sleep(0.2)
-        #pyautogui.mouseDown(button='left')
-        pyautogui.click(button='left')
-
-            
-    elif updown == "Released":
-        #pyautogui.dragTo(scaling_location[0], scaling_location[1], 0.3,button='left')
-        pyautogui.moveTo(scaling_location[0], scaling_location[1])
-        time.sleep(0.2)
-        #pyautogui.mouseUp(button='left')
-        pyautogui.click(button='left')
-'''
-
-
-
+   
 
 
 def New_Main_Game():
@@ -519,26 +481,17 @@ def New_Main_Game():
     for line in gameplanArray:
         print(line)
         time_delay = float(line[0])# We convert the time delay to a float to enable milliseonds
-        #updown = line[1]
 
         locationxy = eval(line[1]) # We get the location of 
         orignal_resolution = eval(line[3]) # We get the location of 
         
         if time_delay == 0:
             time_delay = 0.5
-        print(time_delay)
+
         time.sleep(time_delay)
-        click_updown(locationxy, orignal_resolution )
-
-# CURRENT ISSUE - drag towers seems to not work # seems to be that the mouse up command is not triggering the tower to place # worked around by seperating the move command and click command
-#       timing also seems to  still be an issue
-
-
-
-
-
-
-
+        scaling_location = scaling(locationxy, orignal_resolution)
+        pyautogui.moveTo(scaling_location[0], scaling_location[1])
+        pyautogui.click(button='left')
 
 
 
