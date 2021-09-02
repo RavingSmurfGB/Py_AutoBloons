@@ -67,6 +67,7 @@ By default it is not active, to enable this feature edit the config.txt file fol
 All land monkeys are supported for this feature  
 
 ## Recording Playthroughs
+MUST NOT DRAG N DROP TOWERS WHEN PLACING THEM!!!
 Not yet fully implemented!!!!
 With the file "gameplan_recorder" it is possible to build your own play through that "Py_AutoBloons" will use to beat dark castle!!
 This is stored by defualt as "gameplan.csv" and can be specified to use in config.txt, however the "gameplan.csv" will need to be in the same folder as "Py_AutoBloons.py"
