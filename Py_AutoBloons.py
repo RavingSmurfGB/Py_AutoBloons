@@ -31,7 +31,7 @@ from datetime import datetime
 
 
 # Config file loading...
-current_directory = os.getcwd()
+current_directory = os.getcwd() + "\\"
 if "Joe" in current_directory: # Bodge to fix creator's github repo folders...
     current_directory = current_directory + "\\Py_AutoBloons\\"
 
