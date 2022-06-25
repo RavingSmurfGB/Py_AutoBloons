@@ -36,6 +36,7 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 >       pip install termcolor
 >       pip install opencv-python
 >       pip install pyyaml
+>       pip install ahk
    
 ## How To Use
  1. Launch Bloons TD 6
@@ -79,3 +80,7 @@ You should end the recorder once you see the victory screen, do not click anythi
 ### Insert pictures of start and end 
 ### Create a video to show how to use it
 
+
+## UPDATES  
+
+25/06/2022 - I have not been working on this for sometime, however I recently discovered that the script could not longer place towers, I changed the way that is done to fix this. More improvements should be coming soon... Also Automatic Hero Selection is currently broken.

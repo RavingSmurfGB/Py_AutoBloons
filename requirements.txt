@@ -3,3 +3,4 @@ pillow
 termcolor
 opencv-python
 pyyaml
+ahk

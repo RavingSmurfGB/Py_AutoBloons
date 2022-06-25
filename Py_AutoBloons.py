@@ -1,5 +1,8 @@
 import pyautogui, time, termcolor, yaml, pathlib, os, csv
 from datetime import datetime
+from ahk import AHK
+
+ahk = AHK()
 
 ###########################################[TO DO]###########################################
 
@@ -157,6 +160,7 @@ reso_16 = [
     }
 ]
 
+
 button_positions = { # Creates a dictionary of all positions needed for monkeys (positions mapped to 2160 x 1440 resolution)
     "HOME_MENU_START" : [1123, 1248],
     "EXPERT_SELECTION" : [1778, 1304],
@@ -170,7 +174,7 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "NINJA_LOCATION" : [738, 844],
     "WIZARD_LOCATION" : [736, 645],
     "VICTORY_CONTINUE" : [1283, 1215],
-    "VICTORY_HOME" : [1057, 1135],
+    "VICTORY_HOME" : [957, 1135],
     "EASTER_COLLECTION" : [1279, 911],
     "F_LEFT_INSTA" : [868, 722],
     "F_RIGHT_INSTA" : [1680, 722],
@@ -187,7 +191,6 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "CONFIRM_HERO" : [855, 893]
 
 }
-
 
 upgrade_path = {
     1 : ",",
@@ -266,7 +269,8 @@ def click(location): #pass in x and y, and it will click for you
 
 
 def press_key(key):
-    pyautogui.press(key)
+    ahk.key_press(key) 
+    #pyautogui.press(key)
     time.sleep(0.5)
 
 def jtime(seconds):
@@ -417,6 +421,7 @@ def tmp_scaling(pos_list): # used for easter event, to exit the main menu but wi
 
 
 def hero_obyn_check():
+    ########################################################################################################################## NEEDS REWORK AS BLOONS UPDATED THE UI
     found = pyautogui.locateOnScreen(obyn_hero_path, confidence=0.9)
     if found == None:
         jprint("STATUS -- Hero not detected, changing hero")
@@ -518,6 +523,7 @@ def Main_Game():
     place_tower("HERO", "HERO_LOCATION", 0.5)
 
     press_key("space") # Start the game
+    time.sleep(0.5)
     press_key("space") # Fast forward the game
 
     time.sleep(20)
@@ -746,13 +752,13 @@ jprint("Starting code, move cursor over bloons in the next 5 seconds")
 time.sleep(3)
 hero_obyn_check()
 
-while True:
-    Start_Select_Map()   
-    # round_based_loop()
-    Main_Game()
+#while True:
+Start_Select_Map()   
+# round_based_loop()
+Main_Game()
 
-    Exit_Game()
-
+Exit_Game()
+print("done")
 
 
 ###########################################
