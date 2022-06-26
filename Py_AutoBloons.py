@@ -461,13 +461,6 @@ def Start_Select_Map():
 
 
 
-
-
-
-
-
-
-
 def New_Main_Game():
 
    
@@ -487,29 +480,7 @@ def New_Main_Game():
     for line in gameplanArray:
         print(line)
 
-            #print("do something here!!")
-            
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            #print("do something here!!"
 
 
 
@@ -591,155 +562,6 @@ def Exit_Game():
     easter_event_check()
     time.sleep(2)
 
-
-def round_based_loop():
-    timings = 0
-
-    #SETUP
-    jprint(" STATUS -- Starting main game")
-
-    defeat_check()
-    victory_check()
-    menu_check()
-    
-    time.sleep(2)
-    place_tower("HERO", "HERO_LOCATION", 0.5)
-
-    press_key("space") # Start the game
-    press_key("space") # Fast forward the game
-    time.sleep(1) # pushes back all the 
-
-    #ROUND 1: 9 seconds, 119 cash , hero placed 550
-    jtime(Level_Up_Check(9))
-
-    #ROUND 2: 9.5 seconds, 252 cash, 
-    jtime(Level_Up_Check(9.5))
-
-    #ROUND 3: 10.2 seconds, 111 cash, sub placed 275
-    place_tower("SUBMARINE", "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(10.2))
-    
-    #ROUND 4: 9 seconsd, 221 cash, 
-    jtime(Level_Up_Check(9))
-
-    #ROUND 5: 20 seconds, 450 cash, sub upgraded 110
-    upgrade_tower(1, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(20))
-
-    #ROUND 6: 10 seconds, 233 cash, sub upgraded 380
-    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(10))
-
-    #ROUND 7: 14 seconds, 415 cash, 
-    jtime(Level_Up_Check(14))
-
-    #ROUND 8: 14.2 seconds, 615 cash,
-    jtime(Level_Up_Check(14.2))
-
-    #ROUND 9: 10.3 seconds,  814 cash 
-    jtime(Level_Up_Check(10.3))
-
-    #ROUND 10: 25 seconds, 278 cash, sub upgraded 850
-    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(25))
-
-    #ROUND 11: 11.2 seconds, 42 cash, sub upgraded 425
-    upgrade_tower(1, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(11.2))
-
-    #ROUND 12: 6.3 seconds, 234 cash,
-    jtime(Level_Up_Check(6.3))
-
-    #ROUND 13: 13.2 seconds, 516 cash, ninja placed 425  
-    place_tower("NINJA", "NINJA_LOCATION", timings)
-    jtime(Level_Up_Check(13.2))
-
-    #ROUND 14: 14.1 seconds, 350 cash, ninja upgraded 255, ninja upgraded 295
-    upgrade_tower(1, "NINJA_LOCATION", timings)
-    upgrade_tower(1, "NINJA_LOCATION", timings)
-    jtime(Level_Up_Check(14.1))
-
-    #ROUND 15: 14.1 seconds, 361 cash, ninja upgraded 210, ninja upgraded 720
-    upgrade_tower(3, "NINJA_LOCATION", timings)
-    upgrade_tower(1, "NINJA_LOCATION", timings)
-    jtime(Level_Up_Check(14.1))
-
-    #ROUND 16: 8.1 seconds, 334 cash
-    jtime(Level_Up_Check(8.1))
-
-    #ROUND 17: 3 seconds, 289 cash
-    jtime(Level_Up_Check(17.3))
-
-    #ROUND 18: 14.1 seconds, 647 cash, 
-    jtime(Level_Up_Check(14.5))
-
-    #ROUND 19: 7.2 seconds, 187 cash
-    jtime(Level_Up_Check(7.2))
-
-    #ROUND 20: 3.25 seconds, 373 cash
-    jtime(Level_Up_Check(3.3))
-
-    #ROUND 21: 9.27 seconds 724 cash, 
-    jtime(Level_Up_Check(9.27))
-
-    #ROUND 22: 5.1 seconds, 1022 cash,
-    jtime(Level_Up_Check(5.1))
-
-    #ROUND 23: 4.1 seconds, 364 cash, sub upgraded 975
-    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(4.1))
-
-    #ROUND 24: 7 seconds, 559 cash
-    jtime(Level_Up_Check(7))
-
-    #ROUND 25: 6.3 seconds, 866 cash
-    jtime(Level_Up_Check(6.3))
-
-    #ROUND 26: 7.1 seconds, 1199 cash
-    jtime(Level_Up_Check(7.1))
-
-    #ROUND 27: 13.2 seconds, 1861 cash
-    jtime(Level_Up_Check(13.2))
-
-    #ROUND 28: 3.15 seconds, 2127 cash
-    jtime(Level_Up_Check(3.15))
-
-    #ROUND 29: 6.18 seconds, 2516 cash
-    jtime(Level_Up_Check(6.18))
-
-    #ROUND 30: 7 seconds, 2854 cash
-    jtime(Level_Up_Check(7))
-
-    #ROUND 31: 7 seconds, 3390 cash
-    jtime(Level_Up_Check(7))
-
-    #ROUND 32: 11.18 seconds, 4017 cash
-    jtime(Level_Up_Check(11.18))
-
-    #ROUND 33: 10.18 seconds, 4222 cash
-    jtime(Level_Up_Check(10.18))
-
-    #ROUND 34: 14.03 seconds, 5134 cash
-    jtime(Level_Up_Check(14.03))
-
-    #ROUND 35: 14.15 seconds, 6337 cash
-    jtime(Level_Up_Check(14.15))
-
-    #ROUND 36: 8.09 seconds. 7180 cash
-    upgrade_tower(3, "SUBMARINE_LOCATION", timings)
-    jtime(Level_Up_Check(14.5))
-
-    #ROUND 37: 17.17 seconds, 8519 cash
-    jtime(Level_Up_Check(17.17))
-
-    #ROUND 38: 13.21 seconds, 9762 cash
-    jtime(Level_Up_Check(13.21))
-
-    #ROUND 39: 21.08 seconds, 9478 cash, sub upgraded 2550
-    jtime(Level_Up_Check(21.08))
-
-
-###########################################
 
 
 
