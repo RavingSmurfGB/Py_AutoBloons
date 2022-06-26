@@ -188,7 +188,8 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "XP_TOWER_2" : [1086, 282],
     "HERO_SELECT" : [799, 1272],
     "SELECT_OBYN" : [996, 1296],
-    "CONFIRM_HERO" : [855, 893]
+    "CONFIRM_HERO" : [855, 893],
+    "CHECK_EXIT" : [757, 1088]
 
 }
 
@@ -584,6 +585,7 @@ def Exit_Game():
     click("VICTORY_CONTINUE")
     time.sleep(2)
     click("VICTORY_HOME")
+    click("CHECK_EXIT") #Code was running into problems restarting
     time.sleep(4)
 
     easter_event_check()
@@ -752,13 +754,13 @@ jprint("Starting code, move cursor over bloons in the next 5 seconds")
 time.sleep(3)
 hero_obyn_check()
 
-#while True:
-Start_Select_Map()   
-# round_based_loop()
-Main_Game()
+while True:
+    Start_Select_Map()   
+    # round_based_loop()
+    Main_Game()
 
-Exit_Game()
-print("done")
+    Exit_Game()
+
 
 
 ###########################################
