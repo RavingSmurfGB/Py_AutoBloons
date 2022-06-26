@@ -25,12 +25,17 @@ ahk = AHK()
 #   on each round change call levelcheck()
 #   implement verbose instamonkey collection on lvl up
 
+# ISSUES
+#   Obyn auto hero slecet NEEDS REWORK AS BLOONS UPDATED THE UI
+#   The map will sometimes open the "esc"/ settings menu when upgrading / placing submarine
+#   Occasionally the wrong map will be selected
+#   Ocasionally the game will be deafeted and not know how to handle
+#   Unsure if still occurs, Obyn fails to place
 
 ###########################################
 
 
 ###########################################[SETUP]###########################################
-
 
 
 # Config file loading...
@@ -47,7 +52,6 @@ if pathlib.Path(current_directory + "config.txt").is_file():
 else:
     with open(current_directory + "config.txt", "w") as file: # Open the file as read
         pass
-
 
 
 with open(current_directory + "config.txt") as file: # Open the file as read
@@ -85,8 +89,6 @@ if logging == True:
         file.write("\n" + dt_string + " -- STARTUP \n")# writes to log new startup, includes date/time
 
 
-
-
 def build_gameplan():
     gameplanArray = []
     gameplanFile = "gameplan.csv"
@@ -97,11 +99,6 @@ def build_gameplan():
         for row in spamreader: 
             gameplanArray.append(row) # We build an array of the list in each row
             # This is used as to not keep the file open in case of a program crash..
-
-
-
-
-
 
 
 width, height = pyautogui.size()
@@ -138,7 +135,6 @@ monkeys = {
     "VILLAGE" : "K",
     "HERO" : "U"
 }
-
 
 
 reso_16 = [
@@ -244,11 +240,6 @@ def scaling(pos_list):
     return [x, y]
 
 
-
-
-
-
-
 def jprint(message):
 
     # print(termcolor.colored("hi", "green")) 
@@ -267,7 +258,6 @@ def click(location): #pass in x and y, and it will click for you
     #print(location)
     pyautogui.click(scaling(button_positions[location])) # performs the pyautogui click function while passing in the variable from button_positions that matches button
     time.sleep(0.5)
-
 
 def press_key(key):
     ahk.key_press(key) 
@@ -314,8 +304,6 @@ def Level_Up_Check(seconds):
     #get second time here
     seconds_after = time.time()
     time_dif = seconds_after - seconds_before # we calculate the difference of time that was used in this function
-
-
     
     seconds = seconds - time_dif # we take away the time differance from seconds # how long the script should now wait
 
@@ -360,8 +348,6 @@ def easter_event_check():
         pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
         time.sleep(1)
         
-
-
 
 def victory_check():
     found = pyautogui.locateOnScreen(victory_path, confidence=0.9)
@@ -434,16 +420,11 @@ def hero_obyn_check():
 
 
 
-
 ###########################################
 
 ###########################################[GAME]###########################################
 def Start_Select_Map():
-
-    
     time.sleep(2)
-
-
     jprint("STATUS -- Map Selection in progress")
 
     defeat_check()
@@ -459,11 +440,8 @@ def Start_Select_Map():
     click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
     
 
-
-
 def New_Main_Game():
 
-   
     gameplanArray = []
     gameplanFile = "gameplan.csv"
     with open(gameplanFile, newline='') as csvfile:
@@ -474,14 +452,12 @@ def New_Main_Game():
             gameplanArray.append(row) # We build an array of the list in each row
             # This is used as to not keep the file open in case of a program crash..
 
-
     print(gameplanArray)
 
     for line in gameplanArray:
         print(line)
 
             #print("do something here!!"
-
 
 
 def Main_Game():
@@ -540,12 +516,7 @@ def Main_Game():
     jtime(Level_Up_Check(1))
 
 
-
-
 def Exit_Game():
-    
-
-
     jprint(" STATUS -- Exiting Game, restating loop")
 
     defeat_check()
@@ -563,26 +534,20 @@ def Exit_Game():
     time.sleep(2)
 
 
+###########################################
 
 
 
 
 ###########################################[MAIN LOOP]###########################################
-#New_Main_Game()
-
-
-
 jprint("Starting code, move cursor over bloons in the next 5 seconds")
 time.sleep(3)
 hero_obyn_check()
 
 while True:
     Start_Select_Map()   
-    # round_based_loop()
     Main_Game()
-
     Exit_Game()
-
 
 
 ###########################################
