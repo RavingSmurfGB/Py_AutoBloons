@@ -17,13 +17,10 @@ ahk = AHK()
 #   Disable auto hero select in config.txt
 #   XP monkey support will have to be coded individually with different gameplans!!
 #       or keep the old playthrough and specify if statements for each xp monkey :P
-#   re-create the scaling code in an example and fully document for easy understanding!!
 #   Fix the github contents links!
-#   Send clicks to the game without it being in front!
-
-
-#   on each round change call levelcheck()
 #   implement verbose instamonkey collection on lvl up
+#   Send key press and mouse clicks to Bloons window even if not on front
+#       Also change level check and any other screen shot to work with bloons running in background
 
 # ISSUES
 #   Obyn auto hero slecet NEEDS REWORK AS BLOONS UPDATED THE UI
