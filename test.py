@@ -1,20 +1,18 @@
-from ahk import AHK
-import time
 
-time.sleep(5)
+from pynput import keyboard
 
-ahk = AHK()
 
-win = ahk.find_window(title=b'Untitled - Notepad') # Find the opened window
 
-for window in ahk.windows():
-    #print(window.title)
-    if "Bloons" in str(window.title):
-        window = window.title
-        print("foung bllons!")
 
-        win = ahk.find_window(title=window) # Find the opened window
 
-        win.send("q")
-        win.minimize()
+def on_release(key):
+    #print(''.format(key))
+    print(key)
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
 
+
+listener = keyboard.Listener(on_release=on_release)
+listener.start() 
+listener.join()      

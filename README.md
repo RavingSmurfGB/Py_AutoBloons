@@ -37,6 +37,8 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 >       pip install opencv-python
 >       pip install pyyaml
 >       pip install ahk
+>       pip install pynput
+>       pip install keyboard
    
 ## How To Use
  1. Launch Bloons TD 6

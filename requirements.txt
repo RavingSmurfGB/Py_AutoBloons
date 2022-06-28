@@ -4,3 +4,5 @@ termcolor
 opencv-python
 pyyaml
 ahk
+pynput
+keyboard

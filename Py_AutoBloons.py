@@ -257,7 +257,8 @@ def click(location): #pass in x and y, and it will click for you
     time.sleep(0.5)
 
 def press_key(key):
-    ahk.key_press(key) 
+
+    ahk.send_input(key)
     #pyautogui.press(key)
     time.sleep(0.5)
 
@@ -391,7 +392,8 @@ def upgrade_tower(path, location, seconds): # passsssssssssssssssssss time.sleep
     
     press_key(upgrade_path[path]) #Calls press_key() and passes in button
     time.sleep(0.5)
-    press_key("esc")
+    #press_key("esc")
+    ahk.key_press("esc") 
     if logging == True:
         jprint("Time Delay = " + str(seconds) + " New Time Delay = " + str(seconds_calc))
     jtime(seconds_calc)
@@ -467,12 +469,15 @@ def Main_Game():
     time.sleep(2)
     place_tower("HERO", "HERO_LOCATION", 0.5)
 
-    press_key("space") # Start the game
+    #press_key("space") # Start the game
+    ahk.key_press("space") 
     time.sleep(0.5)
-    press_key("space") # Fast forward the game
+    #press_key("space") # Fast forward the game
+    ahk.key_press("space") 
 
     time.sleep(20)
-    place_tower("SUBMARINE", "SUBMARINE_LOCATION", 8.5)
+    time.sleep(10)
+    place_tower("SUBMARINE", "SUBMARINE_LOCATION", 13.5)
 
     upgrade_tower(1, "SUBMARINE_LOCATION", 18)
 
@@ -500,7 +505,7 @@ def Main_Game():
         jtime(Level_Up_Check(22.5))
         # then sleep for 45 sec
         place_tower(xp_tower, "XP_TOWER_2", 20.5)
-        #we place second xp tower in now
+        #we place second xp tower in nowesc
         # then sleep for 41 sec
         jtime(Level_Up_Check(20.5))
     elif xp_tower_game == False:
