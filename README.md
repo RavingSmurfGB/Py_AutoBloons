@@ -23,11 +23,8 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 
 
 ## Installation
-### Automatic Install   
- 1. Extract .zip
- 2. Run setup.py
-
 ### Manual Install  
+ 0. Install Python
  1. Extract .zip
  2. Open a CMD window
  3. Enter each command bellow
@@ -37,6 +34,7 @@ Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like
 >       pip install opencv-python
 >       pip install pyyaml
 >       pip install ahk
+>       pip install "ahk[binary]"
 >       pip install pynput
 >       pip install keyboard
    
