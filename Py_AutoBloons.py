@@ -417,6 +417,30 @@ def hero_obyn_check():
         press_key("esc")
 
 
+def time_sleep_calc(delay):
+    # This function takes the delay read from gameplanArray and converts the h:mm:ss to purely seconds which can be used by time.sleep()
+
+    #Here we handle the hour portion of the delay
+    hours = delay[0]
+    #print("hours = ", hours)
+    convert_hours = int(hours) * 60 * 60
+
+    #Here we handle the minute portion of the delay
+    tuple_minutes = delay[2], delay[3]
+    minutes = ''.join(str(x) for x in tuple_minutes)
+    #print("minutes = ", minutes)
+    convert_minutes = int(minutes) * 60
+
+    #Here we handle the second portion of the delay
+    tuple_seconds = delay[5], delay[6]
+    seconds = ''.join(str(x) for x in tuple_seconds)
+    #print("seconds = ", seconds)
+
+    #Then we add all the converted seconds together
+    final_delay = int(seconds) + convert_minutes + convert_hours
+    #print(final_delay)
+
+    time.sleep(final_delay + 1)
 
 
 ###########################################
@@ -439,10 +463,16 @@ def Start_Select_Map():
     click("OVERWRITE_SAVE") # Move mouse to overwrite save if exists
     
 
-def New_Main_Game():
+
+
+
+
+
+
+def Main_Game_Reader():
 
     gameplanArray = []
-    gameplanFile = "gameplan.csv"
+    gameplanFile = "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
     with open(gameplanFile, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
 
@@ -451,12 +481,49 @@ def New_Main_Game():
             gameplanArray.append(row) # We build an array of the list in each row
             # This is used as to not keep the file open in case of a program crash..
 
-    print(gameplanArray)
+    #print(gameplanArray)
 
     for line in gameplanArray:
-        print(line)
+        if "Resolution" in line[0]:
+            resolution = line[2] + " " + line[3]
+            print(resolution)
+            pass
 
-            #print("do something here!!"
+        delay = line[1]
+
+        if line[0] == "Keyboard ":
+            key = line[2]
+            print(key + " " + delay)
+            if "space" in key:
+                ahk.key_press(key)
+            else:
+                ahk.send_input(key)
+            print("sending key = " , key)
+            time_sleep_calc(delay)
+            pass
+        
+
+        if line[0] == "Click ":
+
+            location = line[2].split(", ")
+            location = int(location[0][1:]), int(location[1][:-1])
+            
+            #print(location)
+            print(location , delay)
+
+            pyautogui.click(location)
+            time_sleep_calc(delay)
+            pass
+
+
+
+
+
+
+
+
+
+
 
 
 def Main_Game():
@@ -544,12 +611,20 @@ def Exit_Game():
 ###########################################[MAIN LOOP]###########################################
 jprint("Starting code, move cursor over bloons in the next 5 seconds")
 time.sleep(3)
-hero_obyn_check()
+#hero_obyn_check()
+'''
+while True:
+    Main_Game_Reader()
 
+'''
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
 
 
-###########################################
+###Excit the script on level up check
+## OR just handle the event - Like click
+
+
+###########################################U

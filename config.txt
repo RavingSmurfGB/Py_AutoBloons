@@ -38,7 +38,7 @@
 
 XP_Monkey: DART
 Logging: 
-Gameplan_file:
+Gameplan_file: 2.csv
 Auto_Hero_Select: False
 
 
