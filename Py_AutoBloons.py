@@ -312,39 +312,39 @@ def Level_Up_Check(seconds):
     
 
 def easter_event_check():
-    found = pyautogui.locateOnScreen(easter_path, confidence=0.9)
-    if found != None:
-        jprint("DETECTED -- Easter")
-        click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
-        time.sleep(1)
-        click("LEFT_INSTA") # unlock insta
-        time.sleep(1)
-        click("LEFT_INSTA") # collect insta
-        time.sleep(1)
-        click("RIGHT_INSTA") # unlock r insta
-        time.sleep(1)
-        click("RIGHT_INSTA") # collect r insta
-        time.sleep(1)
-        click("F_LEFT_INSTA")
-        time.sleep(1)
-        click("F_LEFT_INSTA")
-        time.sleep(1)
-        click("MID_INSTA") # unlock insta
-        time.sleep(1)
-        click("MID_INSTA") # collect insta
-        time.sleep(1)
-        click("F_RIGHT_INSTA")
-        time.sleep(1)
-        click("F_RIGHT_INSTA")
-        time.sleep(1)
+    #found = pyautogui.locateOnScreen(easter_path, confidence=0.9)
+    #if found != None:
+    jprint("DETECTED -- Easter")
+    click("EASTER_COLLECTION") #DUE TO EASTER EVENT:
+    time.sleep(1)
+    click("LEFT_INSTA") # unlock insta
+    time.sleep(1)
+    click("LEFT_INSTA") # collect insta
+    time.sleep(1)
+    click("RIGHT_INSTA") # unlock r insta
+    time.sleep(1)
+    click("RIGHT_INSTA") # collect r insta
+    time.sleep(1)
+    click("F_LEFT_INSTA")
+    time.sleep(1)
+    click("F_LEFT_INSTA")
+    time.sleep(1)
+    click("MID_INSTA") # unlock insta
+    time.sleep(1)
+    click("MID_INSTA") # collect insta
+    time.sleep(1)
+    click("F_RIGHT_INSTA")
+    time.sleep(1)
+    click("F_RIGHT_INSTA")
+    time.sleep(1)
 
-        time.sleep(1)
-        click("EASTER_CONTINUE")
+    time.sleep(1)
+    click("EASTER_CONTINUE")
 
 
         # awe try to click 3 quick times to get out of the easter mode, but also if easter mode not triggered, to open and close profile quick
-        pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
-        time.sleep(1)
+        #pyautogui.click(tmp_scaling(button_positions["EASTER_EXIT"]))
+        #time.sleep(1)
         
 
 def victory_check():

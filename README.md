@@ -12,6 +12,7 @@ Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 * [What Is Needed](#What_Is_Needed)
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
+* [Event Support](#Event_Support)
 * [Recording Playthroughs](#Recording_Playthroughs)
 
 
@@ -66,6 +67,19 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.  
 By default it is not active, to enable this feature edit the config.txt file follow example there.  
 All land monkeys are supported for this feature  
+
+## Event Support
+With the default behaviour, a insta-monkey event such as the 4th of jully or Easter would break this automated script untill the event is over. 
+This is because once the event requirement to give the player an insta-monkey is reached, Bloons will automatically pop up after a game is over and present the "player" with a screen, for which the "player" must click on each insta-monkey.
+There is code that will claim these insta-monkeys and return to the game loop, however it works on screen-picture detection, a screenshot is taken at the end of a game which checks if a instamonkey needs to be collected.
+However the insta-monkey event changes the user-interface each time, so the picture the code is comparing the screenshot too also needs be changed.
+A way to solve this problem automatically is being designed, but there is no expexted ETA for this.
+#### To Fix:  
+* Take a screenshot of the screen that shows up after the game finishes and enters into the insta-monkey event screen
+* Save the screenshot and rename to the height of your monitor resolution and append "_easter.png". For example 1080_easter.png
+* Navigate to the directory you have saved Py_AutoBloons too, and then enter Support_Files.
+* Delete the file you find in that folder, that matches the screenshot you took earlier
+* Then copy/paste the new screenshot saved previously into the folder and restart Py_AutoBloons.py
 
 ## Recording Playthroughs
 Not yet fully implemented!!!!
