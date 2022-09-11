@@ -91,18 +91,19 @@ IF you have problems with insta events - try this:
 * Then copy/paste the new screenshot saved previously into the folder and restart Py_AutoBloons.py
 
 ## Recording Playthroughs
-Not yet fully implemented!!!!
 With the file "gameplan_recorder" it is possible to build your own play through that "Py_AutoBloons" will use to beat dark castle!!
-This is stored by defualt as "gameplan.csv" and can be specified to use in config.txt, however the "gameplan.csv" will need to be in the same folder as "Py_AutoBloons.py"
-Currently auto hero selection only works for Obyn if you would like to use a different hero, disable auto hero select in the config file
+This is stored by defualt as "gameplan.csv" and can be specified to use in config.txt, however the "gameplan.csv" or whatever you name it will need to be in the same folder as "Py_AutoBloons.py", which may mean you will have to move the .csv file you create.
+ 
+If you are interested in recording your own gameplan to beat a map, timing is very important, try to give yourself a little extra time before buying upgrades to ensure that on another playthrough you will have enough money to buy the same upgrade.
+ 
+Ensure the hero you pick is selected in advance and do not record that section, Also always ensure that you have the correct hero loaded when you go to use the script in the future.
 
-If you are interested in recording your own gameplan to beat dark castle, timing is very important, try to give yourself a little extra time before buying upgrades to ensure that on another playthrough you will have enough money to buy the same upgrade.
-
-You should start the recorder once you have loaded in to dark castle, you will have to click the play button in the recording.
-You should end the recorder once you see the victory screen, do not click anything once the victory screen loads and give an extra minute or two to account for differances in play throughs
-### Insert pictures of start and end 
-### Create a video to show how to use it
-
+### Instructions
+* Start the recorder from the main menu of Bloons TD 6 
+* Go to the map and the gamemode you would like to play
+* Play through the game, being mindfull to take interactions a little slower than usual, and use hotkeys if you know them!
+* End the recorder once you have won and and have pressed the home button from the victory screen.
+ 
 
 ## UPDATES  
 11/09/22 - A universal event catch should work to collect insta-monkeys and not break -- Also auto restart has been developed, see config.txt for more information.
