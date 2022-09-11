@@ -18,8 +18,9 @@ ahk = AHK()
 # consier converting the original playthough to the new .csv format
 #
 # ISSUES
-# Update the readme to explain path - auto launch and how you must launch python script on the same monitor as the game will be on
-#  Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
+#   Explain Failsavfe topleft corner to stop on readme
+#   Update the readme to explain path - auto launch and how you must launch python script on the same monitor as the game will be on
+#   Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
 #   Boats currently are not supported as a XP monkey
 #   Obyn skin detection
 #   Depending on resolution and compute power the timing may be off for some lower end systoms... -- work around recrord own gameplan..
@@ -87,7 +88,15 @@ for key, value in config_file.items():
         if value == None:
             auto_restart_period = 2
         else:
-            auto_restart_period = value    
+            auto_restart_period = value  
+    if key == "Start_Screen_Wait_Time":
+        if value == None:
+            start_wait_time = "12"
+        else:
+            start_wait_time = value  
+
+
+              
     print(key, value) 
 
 
@@ -194,7 +203,8 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "HERO_SELECT" : [799, 1272],
     "SELECT_OBYN" : [996, 1296],
     "CONFIRM_HERO" : [855, 893],
-    "CHECK_EXIT" : [757, 1088]
+    "CHECK_EXIT" : [757, 1088],
+    "BOOT_START" : [1123, 1288],
 
 }
 
@@ -459,7 +469,7 @@ def time_sleep_calc(delay):
 
 ###########################################[GAME]###########################################
 def Start_Select_Map():
-    time.sleep(2)
+    time.sleep(4)
     jprint("STATUS -- Map Selection in progress")
 
     defeat_check()
@@ -652,8 +662,8 @@ if bloons_path != None:
     if launch_game == None:
         bloons_game_thread = Thread(target=start_game)
         bloons_game_thread.start()
-        time.sleep(10)
-        click("HOME_MENU_START")
+    time.sleep(int(start_wait_time))
+    click("BOOT_START")
 
 if autohero_select == True:
     hero_obyn_check()

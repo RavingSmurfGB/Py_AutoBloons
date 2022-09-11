@@ -63,6 +63,14 @@
 #   Example:
 #       Auto_Restart_Period: 3
 #
+#
+#   Start_Screen_Wait_Time
+#
+#   This is used when the script launches the game for you, it will inform the script to wait x amount of seconds before trying to click the start button and play through a map.
+#   The defualt time is 12 seconds, however if the game is stored on a slower drive, such as a hard drive you may wish to extend this time.
+#   Example:
+#       Start_Screen_Wait_Time: 30
+#
 ########################################################################################################################
 #### Edit this section:
 
@@ -74,6 +82,7 @@ Gameplan_file:
 Path_to_Bloons_TD6: 
 Auto_Restart_Enabled: 
 Auto_Restart_Period: 
+Start_Screen_Wait_Time: 
 
 
 ########################################################################################################################
