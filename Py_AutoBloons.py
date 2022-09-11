@@ -18,6 +18,7 @@ ahk = AHK()
 # consier converting the original playthough to the new .csv format
 #
 # ISSUES
+# Update the readme to explain path - auto launch and how you must launch python script on the same monitor as the game will be on
 #  Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
 #   Boats currently are not supported as a XP monkey
 #   Obyn skin detection
@@ -642,14 +643,13 @@ time.sleep(3)
 if bloons_path != None:
     #This code, checks to see if bloons path is not empty- if so it will attempt to launch Bloons TD6 in a new thread, then wait for the game to launch
     # We also check to see if Bloons is running, if so it will not launch the game again
+    launch_game = None
 
     for p in psutil.process_iter():
         if "Bloons" in p.name():
-            launch_game = True
-        else:
             launch_game = False
 
-    if launch_game == True:
+    if launch_game == None:
         bloons_game_thread = Thread(target=start_game)
         bloons_game_thread.start()
         time.sleep(10)
