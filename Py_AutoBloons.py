@@ -137,7 +137,7 @@ monkeys = {# This dictionary provides the hotkeys for the towers in the game
     "GLUE" : "Y",
     "SNIPER" : "Z",
     "SUBMARINE" : "X",
-    "BUCCANEER" : "C",
+    "BOAT" : "C",
     "ACE" : "V",
     "HELI" : "B",
     "MORTAR" : "N",
@@ -205,6 +205,8 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
     "CONFIRM_HERO" : [855, 893],
     "CHECK_EXIT" : [757, 1088],
     "BOOT_START" : [1123, 1288],
+    "BOAT_1" : [1520, 182],
+    "BOAT_2" : [1511, 1134]
 
 }
 
@@ -589,14 +591,24 @@ def Main_Game():
     upgrade_tower(3, "SUBMARINE_LOCATION", 39)
 
     if xp_tower_game == True:
-        place_tower(xp_tower, "XP_TOWER_1", 22.5)
-        #we place first xp towe in here!!!!
-        jtime(Level_Up_Check(22.5))
-        # then sleep for 45 sec
-        place_tower(xp_tower, "XP_TOWER_2", 20.5)
-        #we place second xp tower in nowesc
-        # then sleep for 41 sec
-        jtime(Level_Up_Check(20.5))
+        if xp_tower != "BOAT":
+            place_tower(xp_tower, "XP_TOWER_1", 22.5)
+            #we place first xp towe in here!!!!
+            jtime(Level_Up_Check(22.5))
+            # then sleep for 45 sec
+            place_tower(xp_tower, "XP_TOWER_2", 20.5)
+            #we place second xp tower in nowesc
+            # then sleep for 41 sec
+            jtime(Level_Up_Check(20.5))
+        if xp_tower == "BOAT" or xp_tower == "SUBAMRINE":
+            place_tower(xp_tower, "BOAT_1", 22.5)
+            #we place first xp towe in here!!!!
+            jtime(Level_Up_Check(22.5))
+            # then sleep for 45 sec
+            place_tower(xp_tower, "BOAT_2", 20.5)
+            #we place second xp tower in nowesc
+            # then sleep for 41 sec
+            jtime(Level_Up_Check(20.5))            
     elif xp_tower_game == False:
         jtime(Level_Up_Check(14.5))
         jtime(Level_Up_Check(14.5))

@@ -74,7 +74,7 @@
 ########################################################################################################################
 #### Edit this section:
 
-XP_Monkey: DART
+XP_Monkey: BOAT
 Logging: 
 Auto_Hero_Select: False
 Gameplan_file: 
@@ -96,6 +96,8 @@ Start_Screen_Wait_Time:
 #    ICE
 #    GLUE
 #    SNIPER
+#    SUBMARINE
+#    BOAT
 #    ACE
 #    HELI
 #    MORTAR
