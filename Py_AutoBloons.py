@@ -14,8 +14,11 @@ ahk = AHK()
 #   Think of a solution to handle if the initial UI will be included in the game plan -- maybe have this specified in the csv output -- maybe force the player to record selection of the map !!!!!!!
 #       -- Only dark castle will be played currently...
 #   Implement gameplan reader with the option from the config file
+# Create a gif/ video showing how to record a game playthrough
+# consier converting the original playthough to the new .csv format
 
 # ISSUES
+#  Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
 #   Boats currently are not supported as a XP monkey
 #   Obyn skin detection
 #   Depending on resolution and compute power the timing may be off for some lower end systoms... -- work around recrord own gameplan..
@@ -59,7 +62,7 @@ for key, value in config_file.items():
             xp_tower = value
     if key == "Gameplan_file": 
         if value == None:
-            gameplanFile = "gameplan.csv" # load the defualt plan
+            gameplanFile = None 
         else:
             gameplanFile = value # assign the new value
     if key == "Auto_Hero_Select":
@@ -480,7 +483,7 @@ def Start_Select_Map():
 def Main_Game_Reader():
 
     gameplanArray = []
-    gameplanFile = "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
+    #gameplanFile = "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
     with open(gameplanFile, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
 
@@ -642,7 +645,6 @@ if bloons_path != None:
 
     for p in psutil.process_iter():
         if "Bloons" in p.name():
-        #p.kill()
             launch_game = True
 
     if launch_game == True:
@@ -657,12 +659,15 @@ if autohero_select == True:
 
 
 while True:
-    Start_Select_Map()   
-    Main_Game()
-    Exit_Game()
-    if auto_restart == True:
-        # Only at the end of a game do we check if we should restart
-        check_auto_restart_time()
+    if gameplanFile != None:
+        Main_Game_Reader()
+    else:
+        Start_Select_Map()   
+        Main_Game()
+        Exit_Game()
+        if auto_restart == True:
+            # Only at the end of a game do we check if we should restart
+            check_auto_restart_time()
 
     
 
