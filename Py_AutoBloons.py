@@ -646,6 +646,8 @@ if bloons_path != None:
     for p in psutil.process_iter():
         if "Bloons" in p.name():
             launch_game = True
+        else:
+            launch_game = False
 
     if launch_game == True:
         bloons_game_thread = Thread(target=start_game)

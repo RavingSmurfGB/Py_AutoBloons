@@ -71,7 +71,7 @@ Logging:
 Auto_Hero_Select: False
 Gameplan_file: 
 
-Path_to_Bloons_TD6:
+Path_to_Bloons_TD6: 
 Auto_Restart_Enabled: 
 Auto_Restart_Period: 
 
