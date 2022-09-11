@@ -2,23 +2,23 @@
 A Python script that will beat Bloons TD 6 on Dark Castle - Gives Monkey Money, Insta-Monkeys, Account Levels and Monkey Experiance!
 
 ## Contents
-* [How It Works](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#how-it-works)
-* [Installation](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#installation)
-* [How To Use](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#how-to-use)
-* [What Is Needed](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#what-is-needed)
-* [Compatibility](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#compatibility)
-* [XP Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#xp-support)
-* [Auto Restart](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#auto-restart)
-* [Event Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#event-support)
-* [Recording Playthroughs](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#recording-playthroughs)
+* [How It Works](#how-it-works)
+* [Installation](#installation)
+* [How To Use](#how-to-use)
+* [What Is Needed](#what-is-needed)
+* [Compatibility](#compatibility)
+* [XP Support](#xp-support)
+* [Auto Restart](#auto-restart)
+* [Event Support](#event-support)
+* [Recording Playthroughs](#recording-playthroughs)
 
 
 ## How It Works
 This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
 It will use the Hero OBYN (Which will be selected auto if not), a submarine and a ninja monkey to beat the gane.  
-Please view [What Is Needed](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#what-is-needed) to ensure your setup and ready to run the program.  
-Please view [XP Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#xp-support) if you would like this program to automate XP gathring for monkeys.
-Using the script auto restart is advised as the script can break occasionaly due to many factors which have not been fully determined yet, see [Auto Restart](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#auto-restart)
+Please view [What Is Needed](#what-is-needed) to ensure your setup and ready to run the program.  
+Please view [XP Support](#xp-support) if you would like this program to automate XP gathring for monkeys.
+Using the script auto restart is advised as the script can break occasionaly due to many factors which have not been fully determined yet, see [Auto Restart](#auto-restart)
 
 
 ## Installation
