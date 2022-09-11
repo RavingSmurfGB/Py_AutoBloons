@@ -2,15 +2,15 @@
 A Python script that will beat Bloons TD 6 on Dark Castle - Gives Monkey Money, Insta-Monkeys, Account Levels and Monkey Experiance!
 
 ## Contents
-* [How It Works](#How_It_Works)
-* [Installation](#Installation)
-* [How To Use](#How_To_Use)
-* [What Is Needed](#What_Is_Needed)
-* [Compatibility](#Compatibility)
-* [XP Support](#XP_Support)
-* [Auto Restart](#Auto_Restart)
-* [Event Support](#Event_Support)
-* [Recording Playthroughs](#Recording_Playthroughs)
+* [How It Works](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#how-it-works)
+* [Installation](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#installation)
+* [How To Use](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#how-to-use)
+* [What Is Needed](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#what-is-needed)
+* [Compatibility](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#compatibility)
+* [XP Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#xp-support)
+* [Auto Restart](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#auto-restart)
+* [Event Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#event-support)
+* [Recording Playthroughs](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#recording-playthroughs)
 
 
 ## How It Works
