@@ -1,6 +1,7 @@
-import pyautogui, time, termcolor, yaml, pathlib, os, csv
+import pyautogui, time, termcolor, yaml, pathlib, os, csv, subprocess, psutil
 from datetime import datetime
 from ahk import AHK
+from threading import Thread
 
 ahk = AHK()
 
@@ -9,26 +10,15 @@ ahk = AHK()
 # SETUP
 #   have a setup file that installs requirements    
 
-# NEW GAMEPLAN
-#   Implement a gameplan_reader
-#       Implement terminal questions for:
-#           key to stop recording
-#           file path for save
-#   Disable auto hero select in config.txt
-#   XP monkey support will have to be coded individually with different gameplans!!
-#       or keep the old playthrough and specify if statements for each xp monkey :P
-#   Fix the github contents links!
-#   implement verbose instamonkey collection on lvl up
-#   Send key press and mouse clicks to Bloons window even if not on front
-#       Also change level check and any other screen shot to work with bloons running in background
+# NEW GAMEPLAN - To work on
+#   Think of a solution to handle if the initial UI will be included in the game plan -- maybe have this specified in the csv output -- maybe force the player to record selection of the map !!!!!!!
+#       -- Only dark castle will be played currently...
+#   Implement gameplan reader with the option from the config file
 
 # ISSUES
-#   Obyn auto hero slecet NEEDS REWORK AS BLOONS UPDATED THE UI
-#   The map will sometimes open the "esc"/ settings menu when upgrading / placing submarine
-#   Occasionally the wrong map will be selected
-#   Ocasionally the game will be deafeted and not know how to handle
-#   Unsure if still occurs, Obyn fails to place
-
+#   Boats currently are not supported as a XP monkey
+#   Obyn skin detection
+#   Depending on resolution and compute power the timing may be off for some lower end systoms... -- work around recrord own gameplan..
 ###########################################
 
 
@@ -77,7 +67,25 @@ for key, value in config_file.items():
             autohero_select = False
         else:
             autohero_select = True
+
+    if key == "Auto_Restart_Enabled":
+        if value == None:
+            auto_restart = False
+        else:
+            auto_restart = True
+    if key == "Path_to_Bloons_TD6":
+        if value == None:
+            bloons_path = None
+            auto_restart = False
+        else:
+            bloons_path = value
+    if key == "Auto_Restart_Period":
+        if value == None:
+            auto_restart_period = 2
+        else:
+            auto_restart_period = value    
     print(key, value) 
+
 
 
 if logging == True:
@@ -98,7 +106,7 @@ def build_gameplan():
             # This is used as to not keep the file open in case of a program crash..
 
 
-width, height = pyautogui.size()
+width, height = pyautogui.size() # Used to determine which pictures are needed -- pictures are resolution specific!
 path = current_directory + "Support_Files\\" + str(height) + "_levelup.png"
 victory_path = current_directory + "Support_Files\\" + str(height) + "_victory.png"
 defeat_path = current_directory + "Support_Files\\" + str(height) + "_defeat.png"
@@ -107,7 +115,7 @@ easter_path = current_directory + "Support_Files\\" + str(height) + "_easter.png
 obyn_hero_path = current_directory + "Support_Files\\" + str(height) + "_obyn.png"
 pyautogui.FAILSAFE = True # When mouse is moved to top left, program will exit
 
-monkeys = {
+monkeys = {# This dictionary provides the hotkeys for the towers in the game
     "DART" : "Q",
     "BOOMERANG" : "W",
     "BOMB" : "E",
@@ -134,7 +142,7 @@ monkeys = {
 }
 
 
-reso_16 = [
+reso_16 = [ # This array is used to calculate the 16:9 resolution conversion, only the resolutions below are officially supported
     {
         "width": 1280,
         "height": 720        
@@ -154,7 +162,7 @@ reso_16 = [
 ]
 
 
-button_positions = { # Creates a dictionary of all positions needed for monkeys (positions mapped to 2160 x 1440 resolution)
+button_positions = { # Creates a dictionary of all positions needed for monkeys (positions mapped from a 2160 x 1440 resolution)
     "HOME_MENU_START" : [1123, 1248],
     "EXPERT_SELECTION" : [1778, 1304],
     "RIGHT_ARROW_SELECTION" : [2193, 582],
@@ -186,7 +194,7 @@ button_positions = { # Creates a dictionary of all positions needed for monkeys 
 
 }
 
-upgrade_path = {
+upgrade_path = { # A array that specifies the different upgrade hotkeys for the game
     1 : ",",
     2 : ".",
     3 : "/"
@@ -606,25 +614,60 @@ def Exit_Game():
 ###########################################
 
 
+def start_game():
+    #This function is used to start the game initially and if Auto_restart is enabled it will be used by that function too.
+    #Bloons path is set in config.txt
+        subprocess.call([bloons_path])
 
+def check_auto_restart_time():
+    # This code compares the time bloons was started to the time set by the variable auto_restart_period, if the time has been exceeded it will relaunch bloons
+    for p in psutil.process_iter():
+        if "Bloons" in p.name():     
+            bloons_start_time = datetime.fromtimestamp(p.create_time()).strftime("%H")
+            
+            if int(datetime.now().strftime("%H")) - bloons_start_time > auto_restart_period: # If the time now minus the start time of the game is greater than the auto restart period then....
+                p.kill # Stop the game
+
+                time.sleep(5)
+                start_game()
 
 ###########################################[MAIN LOOP]###########################################
-jprint("Starting code, move cursor over bloons in the next 5 seconds")
+jprint("Starting code, move cursor over bloons in the next 5 seconds if the path for Bloons TD 6 has not been provided")
 time.sleep(3)
-#hero_obyn_check()
-'''
-while True:
-    Main_Game_Reader()
 
-'''
+
+if bloons_path != None:
+    #This code, checks to see if bloons path is not empty- if so it will attempt to launch Bloons TD6 in a new thread, then wait for the game to launch
+    # We also check to see if Bloons is running, if so it will not launch the game again
+
+    for p in psutil.process_iter():
+        if "Bloons" in p.name():
+        #p.kill()
+            launch_game = True
+
+    if launch_game == True:
+        bloons_game_thread = Thread(target=start_game)
+        bloons_game_thread.start()
+        time.sleep(10)
+        click("HOME_MENU_START")
+
+if autohero_select == True:
+    hero_obyn_check()
+
+
+
 while True:
     Start_Select_Map()   
     Main_Game()
     Exit_Game()
+    if auto_restart == True:
+        # Only at the end of a game do we check if we should restart
+        check_auto_restart_time()
+
+    
 
 
-###Excit the script on level up check
-## OR just handle the event - Like click
+
 
 
 ###########################################U

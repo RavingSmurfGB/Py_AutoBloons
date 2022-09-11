@@ -1,9 +1,5 @@
 # Py_AutoBloons
- *This Script is undergoing a re-write, to make creating your own level designs easier and optimising the way to record a gameplan.
-Stay tuned for further updates!*.
-
-A Python script that will beat Bloons TD 6 on Dark Castle.  
-Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
+A Python script that will beat Bloons TD 6 on Dark Castle - Gives Monkey Money, Insta-Monkeys, Account Levels and Monkey Experiance!
 
 ## Contents
 * [How It Works](#How_It_Works)
@@ -12,6 +8,7 @@ Gives Monkey Money, Insta-Monkeys, Account Leve;s, Monkey Experiance!
 * [What Is Needed](#What_Is_Needed)
 * [Compatibility](#Compatibility)
 * [XP Support](#XP_Support)
+* [Auto Restart](#Auto_Restart)
 * [Event Support](#Event_Support)
 * [Recording Playthroughs](#Recording_Playthroughs)
 
@@ -21,6 +18,7 @@ This program will select the map Dark Castle, beat it on easy difficulty, collec
 It will use the Hero OBYN (Which will be selected auto if not), a submarine and a ninja monkey to beat the gane.  
 Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program.  
 Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like this program to automate XP gathring for monkeys.
+Using the script auto restart is advised as the script can break occasionaly due to many factors which have not been fully determined yet, see [Auto Restart](#Auto_Restart)<a name="Auto_Restart"></a>
 
 
 ## Installation
@@ -57,7 +55,7 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 #### Resolutions officialy supported:  
 * 1920x1080  
 * 2560x1440  
-* 3840x2160 \| Issue with Hero not being selected, select OBYN hero manually as a temporary fix
+* 3840x2160
 #### Other Tips:
 \| Resolutions based on the above, but are 21:9 may also work  
 \| Resolution refers to your main monitor size, not game resolution  
@@ -66,19 +64,25 @@ Ninja         | <ul><li>Ninja Discipline  (Path 1)</li><li>Sharp Shurikens  (Pat
 ## XP Support
 As mentioned this program can automatically gain XP for towers, this is relatively slow, but over a long AFK time it does add up to a lot.  
 By default it is not active, to enable this feature edit the config.txt file follow example there.  
-All land monkeys are supported for this feature  
+All land monkeys are supported for this feature; Submarine monkeys gain xp by default and Boat monkeys are being worked on currently. 
+
+## Auto Restart
+This can be used to close and restart the game occasionly which is extremly helpfull if the script runs in to any issues along its playthrough.
+While many bugs have been worked out, due to the complicated nature of automating a game without a API not all will ever be found.
+To use this feature you will need to edit the config.txt, instructions for which are provided in config.txt
 
 ## Event Support
 A new system has been rolled out which should universally detect insta-monkey events, such as the 4th of jully or Easter.
 If there are any problems try the To Fix section below and if you still run in to issues open a git-issue.
 
 
-##DEPRECATED With the default behaviour, a insta-monkey event such as the 4th of jully or Easter would break this automated script untill the event is over. 
+##DEPRECATED - However may still be usefull if problems arise from insta-monkey events.
+With the default behaviour, a insta-monkey event such as the 4th of jully or Easter would break this automated script untill the event is over. 
 This is because once the event requirement to give the player an insta-monkey is reached, Bloons will automatically pop up after a game is over and present the "player" with a screen, for which the "player" must click on each insta-monkey.
 There is code that will claim these insta-monkeys and return to the game loop, however it works on screen-picture detection, a screenshot is taken at the end of a game which checks if a instamonkey needs to be collected.
 However the insta-monkey event changes the user-interface each time, so the picture the code is comparing the screenshot too also needs be changed.
 A way to solve this problem automatically is being designed, but there is no expexted ETA for this.
-#### To Fix: 
+To Fix: 
 IF you have problems with insta events - try this: 
 * Take a screenshot of the screen that shows up after the game finishes and enters into the insta-monkey event screen
 * Save the screenshot and rename to the height of your monitor resolution and append "_easter.png". For example 1080_easter.png
@@ -101,5 +105,4 @@ You should end the recorder once you see the victory screen, do not click anythi
 
 
 ## UPDATES  
-
-25/06/2022 - I have not been working on this for sometime, however I recently discovered that the script could not longer place towers, I changed the way that is done to fix this. More improvements should be coming soon... Also Automatic Hero Selection is currently broken.
+11/09/22 - A universal event catch should work to collect insta-monkeys and not break -- Also auto restart has been developed, see config.txt for more information.

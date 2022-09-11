@@ -1,5 +1,5 @@
 #################################################[Py_AutoBloons]#######################################################
-# This if the configuration file for Py_AutoBloons
+# This if the configuration file for Py_AutoBloons, do not edit this section
 #
 #   XP_Monkey
 #
@@ -28,21 +28,55 @@
 #       Gameplan_file: gameplan.csv
 #
 #
-#   Auto_Hero_Select - not fully implemented
+#   Auto_Hero_Select 
 #   This options disables automatically selecting Obyn as a hero once the program starts. This is mainly used if a user has created their own gameplan.
 #   By defualt this option is True, even if blank in this file.
+#   Skins are not supported, be sure to only have the defualt Obyn skin equipted.
 #   Example:   
 #       Auto_Hero_Select: False
 #
+#
+#   Path_to_Bloons_TD6:
+#
+#   This option tells the script where to start the game from, if this is empty it will assume that you will start the game manually.
+#   However if it is filled it will check to see if Bloons TD6 is open, if not it will open it. 
+#   Also if the path is not specified Auto Restart cannot be used.
+#   To find this go to steam, open the entry for Bloons TD6 in your library, press the settings cog, under the menu manage, browse local files.
+#   Example:
+#       Path_to_Bloons_TD6: D:\SteamLibrary\steamapps\common\BloonsTD6\BloonsTD6.exe
+#
+#
+#   Auto_Restart_Enabled
+#
+#   This option allows the script to be restarted periodicly, this is usefull as the script can break occasionaly due to many factors.
+#   The default configuration is false, however it is highly recomended to enable it.
+#   The path to the Bloons TD6.exe must be provided for Auto_restart to be enabled
+#   Example:
+#       Auto_Hero_Select: True
+#
+#
+#   Auto_Restart_Period
+#
+#   This option specifies the duration between script restarts, the default entry is every 2 hours unless specified.
+#   This must be given in hours.
+#   Example:
+#       Auto_Restart_Period: 3
+#
 ########################################################################################################################
+#### Edit this section:
 
 XP_Monkey: DART
 Logging: 
-Gameplan_file: 2.csv
 Auto_Hero_Select: False
+Gameplan_file:
+
+Path_to_Bloons_TD6:
+Auto_Restart_Enabled: 
+Auto_Restart_Period: 
 
 
 ########################################################################################################################
+#### Do not edit this section
 #   Bellow are the monkeys that are supported using XP_Monkey:
 #
 #    DART
