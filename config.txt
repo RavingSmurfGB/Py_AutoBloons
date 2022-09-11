@@ -42,6 +42,7 @@
 #   However if it is filled it will check to see if Bloons TD6 is open, if not it will open it. 
 #   Also if the path is not specified Auto Restart cannot be used.
 #   To find this go to steam, open the entry for Bloons TD6 in your library, press the settings cog, under the menu manage, browse local files.
+#   If the code crashed when this option is enabled you may have to put two back slashes in between each folder e.g. \\BloonsTD6\\BloonsTD6.exe
 #   Example:
 #       Path_to_Bloons_TD6: D:\SteamLibrary\steamapps\common\BloonsTD6\BloonsTD6.exe
 #
@@ -68,7 +69,7 @@
 XP_Monkey: DART
 Logging: 
 Auto_Hero_Select: False
-Gameplan_file:
+Gameplan_file: 
 
 Path_to_Bloons_TD6:
 Auto_Restart_Enabled: 

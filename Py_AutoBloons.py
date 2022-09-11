@@ -9,14 +9,14 @@ ahk = AHK()
 
 # SETUP
 #   have a setup file that installs requirements    
-
+#
 # NEW GAMEPLAN - To work on
 #   Think of a solution to handle if the initial UI will be included in the game plan -- maybe have this specified in the csv output -- maybe force the player to record selection of the map !!!!!!!
 #       -- Only dark castle will be played currently...
 #   Implement gameplan reader with the option from the config file
 # Create a gif/ video showing how to record a game playthrough
 # consier converting the original playthough to the new .csv format
-
+#
 # ISSUES
 #  Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
 #   Boats currently are not supported as a XP monkey
