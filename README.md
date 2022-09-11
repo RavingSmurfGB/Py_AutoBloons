@@ -16,9 +16,9 @@ A Python script that will beat Bloons TD 6 on Dark Castle - Gives Monkey Money, 
 ## How It Works
 This program will select the map Dark Castle, beat it on easy difficulty, collect any levels, collect any event items, then loop continously.  
 It will use the Hero OBYN (Which will be selected auto if not), a submarine and a ninja monkey to beat the gane.  
-Please view [What Is Needed](#What_Is_Needed)<a name="What_Is_Needed"></a> to ensure your setup and ready to run the program.  
-Please view [XP Support](#XP_Support)<a name="XP_Support"></a> if you would like this program to automate XP gathring for monkeys.
-Using the script auto restart is advised as the script can break occasionaly due to many factors which have not been fully determined yet, see [Auto Restart](#Auto_Restart)<a name="Auto_Restart"></a>
+Please view [What Is Needed](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#what-is-needed) to ensure your setup and ready to run the program.  
+Please view [XP Support](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#xp-support) if you would like this program to automate XP gathring for monkeys.
+Using the script auto restart is advised as the script can break occasionaly due to many factors which have not been fully determined yet, see [Auto Restart](https://github.com/RavingSmurfGB/Py_AutoBloons/edit/main/README.md#auto-restart)
 
 
 ## Installation
