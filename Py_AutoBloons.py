@@ -15,9 +15,11 @@ ahk = AHK()
 #       -- Only dark castle will be played currently...
 #   Implement gameplan reader with the option from the config file
 # Create a gif/ video showing how to record a game playthrough
-# consier converting the original playthough to the new .csv format
+# consier converting the original playthough to the new .csv format -- use pyatuo bloons and recordit with gameplan recorder
 #
 # ISSUES
+#   Ensure we get a fresh copy of the bloons service - otherwise it will not reboot past the first one- or allwasys reboot
+#   Ensure the gameplay starts the game proper!!!!!!!!!!!! -- presses the start button on launch
 #   Explain Failsavfe topleft corner to stop on readme
 #   Update the readme to explain path - auto launch and how you must launch python script on the same monitor as the game will be on
 #   Find a way to handle python escape keys -- example,  "C:\\Users\\Joe\\Documents\\GitHub\\Py_AutoBloons\\gameplan_recorder\\dart.csv"
@@ -600,7 +602,7 @@ def Main_Game():
             #we place second xp tower in nowesc
             # then sleep for 41 sec
             jtime(Level_Up_Check(20.5))
-        if xp_tower == "BOAT" or xp_tower == "SUBAMRINE":
+        if xp_tower == "BOAT" or xp_tower == "SUBMARINE":
             place_tower(xp_tower, "BOAT_1", 22.5)
             #we place first xp towe in here!!!!
             jtime(Level_Up_Check(22.5))
