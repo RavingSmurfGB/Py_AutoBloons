@@ -1,5 +1,6 @@
 # Py_AutoBloons
-A Python script that will beat Bloons TD 6 on Dark Castle - Gives Monkey Money, Insta-Monkeys, Account Levels and Monkey Experiance!
+A Python script that will playthrough the Dark Castle map on Bloons TD 6
+- Generayes Monkey Money, Insta-Monkeys, Account Levels and Monkey Experiance!
 
 ## Contents
 * [How It Works](#how-it-works)
